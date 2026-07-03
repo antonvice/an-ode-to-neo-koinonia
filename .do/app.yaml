@@ -19,10 +19,9 @@ ingress:
 
 services:
   - name: web
-    github:
-      repo: antonvice/an-ode-to-neo-koinonia
+    git:
+      repo_clone_url: https://github.com/antonvice/an-ode-to-neo-koinonia.git
       branch: main
-      deploy_on_push: true
     environment_slug: node-js
     build_command: npm run build
     run_command: node ./dist/server/entry.mjs
