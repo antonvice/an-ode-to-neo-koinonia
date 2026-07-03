@@ -1,0 +1,38 @@
+name: neo-koinonia
+region: nyc
+
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+
+domains:
+  - domain: neok.subcortical.wtf
+    type: PRIMARY
+
+ingress:
+  rules:
+    - match:
+        path:
+          prefix: /
+      component:
+        name: web
+
+services:
+  - name: web
+    github:
+      repo: antonvice/an-ode-to-neo-koinonia
+      branch: main
+      deploy_on_push: true
+    environment_slug: node-js
+    build_command: npm run build
+    run_command: node ./dist/server/entry.mjs
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    envs:
+      - key: HOST
+        value: 0.0.0.0
+        scope: RUN_TIME
+      - key: PORT
+        value: "8080"
+        scope: RUN_TIME

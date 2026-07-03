@@ -1,0 +1,2090 @@
+---
+import Layout from '../layouts/Layout.astro';
+import graph from '../data/graph.json';
+---
+
+<Layout>
+	<main class="app-shell" data-graph={JSON.stringify(graph)}>
+		<section class="stage" aria-label="Interactive future philosophy universe">
+			<div id="graph-canvas" class="graph-canvas"></div>
+			<div id="label-layer" class="label-layer" aria-hidden="true"></div>
+
+				<div class="topbar">
+					<div>
+						<p class="eyebrow">← Admin / Memory Graph</p>
+						<h1>An Ode to Neo-Koinonia</h1>
+					</div>
+				</div>
+
+			<form id="login-panel" class="login-panel" hidden>
+				<label>
+					<span>Editor key</span>
+					<input type="password" name="key" autocomplete="current-password" placeholder="neo" />
+				</label>
+				<button type="submit">Unlock</button>
+			</form>
+
+			<blockquote class="cosmic-verse" aria-label="Cosmic verse">
+				<span>behold the majesty of cosmic spark</span>
+				<span>from the erosion of the dying light</span>
+				<span>Do not go gentle into that good night</span>
+			</blockquote>
+
+			<div class="statusbar" aria-live="polite">
+				<span id="visible-count">0 nodes</span>
+				<span id="save-status">Read mode</span>
+				<span id="selected-path">Root</span>
+			</div>
+		</section>
+
+		<aside id="inspector" class="inspector" aria-label="Selected graph item">
+			<button
+				type="button"
+				class="inspector-toggle"
+				data-action="toggle-inspector"
+				aria-controls="inspector"
+				aria-expanded="true"
+				aria-label="Collapse sidebar"
+				title="Collapse sidebar"
+			>
+				<span aria-hidden="true">›</span>
+			</button>
+			<div class="inspector-content">
+				<div class="inspector-header">
+					<p id="item-kicker">Selected Node</p>
+					<h2 id="item-title">Neo-Koinonia</h2>
+				</div>
+				<div class="meta-grid">
+					<div>
+						<span>Level</span>
+						<strong id="item-level">0</strong>
+					</div>
+					<div>
+						<span>Branch</span>
+						<strong id="item-group">Root</strong>
+					</div>
+				</div>
+				<div id="item-body" class="prose"></div>
+				<div class="children-panel">
+					<h3>Branches</h3>
+					<div id="children-list" class="children-list"></div>
+				</div>
+
+				<form id="editor-panel" class="editor-panel" hidden>
+					<div class="editor-title">
+						<h3>Editor</h3>
+						<span id="editor-kind">Node</span>
+					</div>
+					<label>
+						<span>Title</span>
+						<input id="edit-title" name="title" />
+					</label>
+					<label>
+						<span>Description</span>
+						<input id="edit-description" name="description" />
+					</label>
+					<label>
+						<span>Tags</span>
+						<input id="edit-tags" name="tags" placeholder="startups, venture, ai" />
+					</label>
+					<label id="group-field">
+						<span>Group</span>
+						<input id="edit-group" name="group" />
+					</label>
+					<label>
+						<span>Color</span>
+						<input id="edit-color" name="color" type="color" />
+					</label>
+					<label>
+						<span>Text</span>
+						<textarea id="edit-body" name="body" rows="7"></textarea>
+					</label>
+					<button type="submit">Save selected</button>
+
+					<div class="create-node">
+						<h3>New Node</h3>
+						<label>
+							<span>Child title</span>
+							<input id="new-title" name="newTitle" placeholder="New orbit" />
+						</label>
+						<label>
+							<span>Opening text</span>
+							<textarea id="new-body" name="newBody" rows="4" placeholder="Describe this branch."></textarea>
+						</label>
+						<button type="button" id="create-node">Create child node</button>
+					</div>
+				</form>
+			</div>
+		</aside>
+	</main>
+
+	<script>
+		import * as THREE from 'three';
+		import { Wobble } from '@alienkitty/alien.js/three';
+		import { Easing } from '@alienkitty/space.js';
+		import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+		import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+		import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+		const shell = document.querySelector('.app-shell');
+		let graph = JSON.parse(shell.dataset.graph);
+		let nodesById = new Map();
+		let childrenById = new Map();
+		let edgesById = new Map();
+
+		const mount = document.querySelector('#graph-canvas');
+		const labelLayer = document.querySelector('#label-layer');
+		const inspectorPanel = document.querySelector('#inspector');
+		const inspectorContent = document.querySelector('.inspector-content');
+		const inspectorToggle = document.querySelector('[data-action="toggle-inspector"]');
+		const loginPanel = document.querySelector('#login-panel');
+		const editorPanel = document.querySelector('#editor-panel');
+		const saveStatus = document.querySelector('#save-status');
+		const inspector = {
+			kicker: document.querySelector('#item-kicker'),
+			title: document.querySelector('#item-title'),
+			level: document.querySelector('#item-level'),
+			group: document.querySelector('#item-group'),
+			body: document.querySelector('#item-body'),
+			children: document.querySelector('#children-list'),
+			count: document.querySelector('#visible-count'),
+			path: document.querySelector('#selected-path'),
+		};
+		const editor = {
+			kind: document.querySelector('#editor-kind'),
+			title: document.querySelector('#edit-title'),
+			description: document.querySelector('#edit-description'),
+			tags: document.querySelector('#edit-tags'),
+			group: document.querySelector('#edit-group'),
+			groupField: document.querySelector('#group-field'),
+			color: document.querySelector('#edit-color'),
+			body: document.querySelector('#edit-body'),
+			newTitle: document.querySelector('#new-title'),
+			newBody: document.querySelector('#new-body'),
+		};
+
+		let expanded = new Set();
+		let selectedId = 'neo-koinonia';
+		let selectedEdgeId = null;
+		let selectedOrbitLevel = null;
+		let animationId;
+		let editUnlocked = localStorage.getItem('neo-editor') === 'unlocked';
+		let cameraTarget = new THREE.Vector3(0, 5, 58);
+		let cameraLookTarget = new THREE.Vector3(0, 0, 0);
+		const cameraLookCurrent = new THREE.Vector3(0, 0, 0);
+		const minFocusDistance = 24;
+		const maxFocusDistance = 142;
+		let focusDistance = 62;
+		const cameraDirection = new THREE.Vector3(0, 0.12, 1).normalize();
+		const focusPivot = new THREE.Vector3(0, 0, 0);
+		const focusPivotTarget = new THREE.Vector3(0, 0, 0);
+		let focusProgress = 1;
+		let focusStartedAt = 0;
+		const focusDuration = 1.05;
+		const graphRotation = { x: -0.08, y: 0 };
+		const graphRotationEuler = new THREE.Euler();
+		const dragState = { active: false, moved: false, x: 0, y: 0 };
+		const interactive = [];
+		const nodeObjects = new Map();
+		const edgeObjects = new Map();
+		const orbitObjects = new Map();
+		const nodeFocusVisuals = new Map();
+		const edgeFocusVisuals = new Map();
+		const orbitFocusVisuals = new Map();
+		const textureCache = new Map();
+		const shipObjects = [];
+		const starLayers = [];
+		let lastFrameTime = 0;
+		const worldScratch = new THREE.Vector3();
+		const cameraScratch = new THREE.Vector3();
+		const cameraRightScratch = new THREE.Vector3();
+		const cameraUpScratch = new THREE.Vector3();
+		const cameraWobbleOffset = new THREE.Vector3();
+		const cameraWobble = new Wobble(cameraWobbleOffset);
+		cameraWobble.scale = 0.34;
+		cameraWobble.frequency.set(0.34, 0.22, 0.28);
+		cameraWobble.amplitude.set(0.9, 0.45, 0.65);
+		cameraWobble.lerpSpeed = 0.018;
+		const orbitPalette = ['#ffffff', '#6ee7ff', '#8fffc1', '#ffd166', '#c792ff', '#ff8fb3', '#7cf7df'];
+
+		function escapeMarkup(value) {
+			return String(value)
+				.replaceAll('&', '&amp;')
+				.replaceAll('<', '&lt;')
+				.replaceAll('>', '&gt;')
+				.replaceAll('"', '&quot;')
+				.replaceAll("'", '&#039;');
+		}
+
+		function nodeDetailHtml(node) {
+			const description = node.description ? `<p class="node-description">${escapeMarkup(node.description)}</p>` : '';
+			const tags = Array.isArray(node.tags) ? node.tags : [];
+			const tagList = tags.length
+				? `<div class="tag-list">${tags.map((tag) => `<span>${escapeMarkup(tag)}</span>`).join('')}</div>`
+				: '';
+			return `${description}${tagList}${node.html || ''}`;
+		}
+
+		const scene = new THREE.Scene();
+		scene.fog = new THREE.FogExp2(0x03050a, 0.0065);
+		const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 1200);
+		camera.position.copy(cameraTarget);
+		const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+		mount.appendChild(renderer.domElement);
+
+		scene.add(new THREE.AmbientLight(0x9fb7ff, 0.55));
+		const sun = new THREE.PointLight(0xf8e7b4, 420, 180);
+		sun.position.set(0, 0, 0);
+		scene.add(sun);
+		const rim = new THREE.PointLight(0x7dd3fc, 80, 160);
+		rim.position.set(-26, 18, 35);
+		scene.add(rim);
+
+		const universeGroup = new THREE.Group();
+		const orbitGroup = new THREE.Group();
+		const edgeGroup = new THREE.Group();
+		const nodeGroup = new THREE.Group();
+		scene.add(universeGroup, orbitGroup, edgeGroup, nodeGroup);
+
+		const composer = new EffectComposer(renderer);
+		composer.addPass(new RenderPass(scene, camera));
+		const bloomPass = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.68, 0.42, 0.28);
+		composer.addPass(bloomPass);
+
+		const raycaster = new THREE.Raycaster();
+		raycaster.params.Line.threshold = 0.55;
+		const pointer = new THREE.Vector2();
+
+		function rebuildIndexes() {
+			nodesById = new Map(graph.nodes.map((node) => [node.id, node]));
+			edgesById = new Map(graph.edges.map((edge) => [edge.id, edge]));
+			childrenById = new Map();
+			graph.edges.forEach((edge) => {
+				if (!childrenById.has(edge.source)) childrenById.set(edge.source, []);
+				const child = nodesById.get(edge.target);
+				if (child) childrenById.get(edge.source).push(child);
+			});
+		}
+
+		function visibleNodeIds() {
+			return new Set(graph.nodes.map((node) => node.id));
+		}
+
+		function clearGroup(group) {
+			while (group.children.length) {
+				const child = group.children.pop();
+				child.geometry?.dispose();
+				child.material?.dispose();
+			}
+		}
+
+		function clearLabels() {
+			labelLayer.innerHTML = '';
+		}
+
+		function makeDomLabel(text, color = '#f2efe6') {
+			const label = document.createElement('div');
+			label.className = 'graph-label';
+			label.textContent = text;
+			label.style.setProperty('--label-color', color || '#f2efe6');
+			labelLayer.appendChild(label);
+			return label;
+		}
+
+		function placeDomLabel(label, localPosition, group, opacity, scale = 1) {
+			if (!label) return;
+			worldScratch.copy(localPosition);
+			group.localToWorld(worldScratch);
+			cameraScratch.copy(worldScratch).project(camera);
+			const visible = cameraScratch.z > -1 && cameraScratch.z < 1 && opacity > 0.01;
+			label.hidden = !visible;
+			if (!visible) return;
+			const x = (cameraScratch.x * 0.5 + 0.5) * labelLayer.clientWidth;
+			const y = (-cameraScratch.y * 0.5 + 0.5) * labelLayer.clientHeight;
+			label.style.opacity = String(opacity);
+			label.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) scale(${scale})`;
+		}
+
+		function makeTextSprite(text, color = '#f2efe6', options = {}) {
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			const fontSize = options.orbit ? 42 : options.edge ? 38 : options.prominent ? 62 : 54;
+			const fontWeight = options.prominent ? 900 : options.edge ? 780 : 850;
+			const font = `${fontWeight} ${fontSize}px Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`;
+			ctx.font = font;
+			const maxChars = options.orbit ? 26 : options.edge ? 34 : options.prominent ? 32 : 24;
+			const fitted = text.length > maxChars ? `${text.slice(0, maxChars - 3)}...` : text;
+			const paddingX = options.prominent ? 50 : options.edge ? 34 : 36;
+			const paddingY = options.prominent ? 26 : options.edge ? 18 : 20;
+			const width = Math.ceil(ctx.measureText(fitted).width + paddingX * 2);
+			const height = Math.ceil(fontSize + paddingY * 2);
+			const ratio = Math.min(window.devicePixelRatio || 1, 2);
+			canvas.width = width * ratio;
+			canvas.height = height * ratio;
+			canvas.style.width = `${width}px`;
+			canvas.style.height = `${height}px`;
+			ctx.scale(ratio, ratio);
+			ctx.font = font;
+			ctx.textAlign = 'center';
+			ctx.textBaseline = 'middle';
+			ctx.lineJoin = 'round';
+
+			const accent = new THREE.Color(color || '#f2efe6');
+			const r = Math.round(accent.r * 255);
+			const g = Math.round(accent.g * 255);
+			const b = Math.round(accent.b * 255);
+			const radius = Math.min(28, height / 2);
+			const plate = ctx.createLinearGradient(0, 0, 0, height);
+			plate.addColorStop(0, `rgba(${r},${g},${b},${options.prominent ? 0.24 : options.edge ? 0.22 : 0.2})`);
+			plate.addColorStop(0.52, `rgba(1,2,7,${options.prominent ? 0.99 : 0.9})`);
+			plate.addColorStop(1, `rgba(0,0,0,${options.prominent ? 0.98 : 0.76})`);
+			ctx.shadowColor = `rgba(${r},${g},${b},${options.prominent ? 0.22 : 0.44})`;
+			ctx.shadowBlur = options.prominent ? 8 : options.edge ? 18 : 12;
+			ctx.fillStyle = plate;
+			ctx.beginPath();
+			ctx.roundRect(3, 3, width - 6, height - 6, radius);
+			ctx.fill();
+			ctx.shadowBlur = 0;
+			ctx.strokeStyle = `rgba(${r},${g},${b},${options.prominent ? 0.76 : options.edge ? 0.58 : 0.55})`;
+			ctx.lineWidth = options.prominent ? 2.5 : 2;
+			ctx.stroke();
+
+			ctx.lineWidth = options.prominent ? 16 : options.edge ? 10 : 13;
+			ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+			ctx.fillStyle = options.prominent ? '#d9f4ff' : '#f7fbff';
+			ctx.shadowColor = 'rgba(0,0,0,0.9)';
+			ctx.shadowBlur = options.prominent ? 0 : 7;
+			ctx.strokeText(fitted, width / 2, height / 2);
+			ctx.lineWidth = options.prominent ? 3 : options.edge ? 3 : 4;
+			ctx.strokeStyle = `rgba(${r},${g},${b},${options.prominent ? 0.52 : 0.72})`;
+			ctx.strokeText(fitted, width / 2, height / 2);
+			ctx.shadowColor = options.prominent ? 'rgba(0,0,0,0)' : `rgba(${r},${g},${b},0.45)`;
+			ctx.shadowBlur = options.prominent ? 0 : options.edge ? 12 : 8;
+			ctx.fillText(fitted, width / 2, height / 2);
+			const texture = new THREE.CanvasTexture(canvas);
+			texture.colorSpace = THREE.SRGBColorSpace;
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			texture.generateMipmaps = false;
+			const sprite = new THREE.Sprite(
+				new THREE.SpriteMaterial({
+					map: texture,
+					transparent: true,
+					depthTest: false,
+					depthWrite: false,
+					toneMapped: false,
+				})
+			);
+			const worldHeight = options.orbit ? 0.7 : options.edge ? 0.64 : options.prominent ? 1.04 : 0.86;
+			sprite.scale.set(worldHeight * (width / height), worldHeight, 1);
+			sprite.renderOrder = options.prominent ? 64 : options.edge ? 34 : 32;
+			sprite.userData = { texture };
+			return sprite;
+		}
+
+		function makeRadialTexture(inner, outer, size = 96) {
+			const canvas = document.createElement('canvas');
+			canvas.width = size;
+			canvas.height = size;
+			const ctx = canvas.getContext('2d');
+			const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+			gradient.addColorStop(0, inner);
+			gradient.addColorStop(0.35, inner);
+			gradient.addColorStop(1, outer);
+			ctx.fillStyle = gradient;
+			ctx.fillRect(0, 0, size, size);
+			return new THREE.CanvasTexture(canvas);
+		}
+
+		function levelRadius(level) {
+			if (!level) return 0;
+			const count = graph.nodes.filter((node) => node.level === level).length || 1;
+			return 6.2 + level * 5.75 + Math.sqrt(count) * 1.35;
+		}
+
+		function makeSkyTexture() {
+			const width = 2048;
+			const height = 1024;
+			const canvas = document.createElement('canvas');
+			canvas.width = width;
+			canvas.height = height;
+			const ctx = canvas.getContext('2d');
+			const bg = ctx.createLinearGradient(0, 0, width, height);
+			bg.addColorStop(0, '#02030a');
+			bg.addColorStop(0.45, '#050712');
+			bg.addColorStop(1, '#010207');
+			ctx.fillStyle = bg;
+			ctx.fillRect(0, 0, width, height);
+
+			for (let arm = 0; arm < 3; arm++) {
+				ctx.save();
+				ctx.translate(width * (0.35 + arm * 0.14), height * (0.46 + (arm - 1) * 0.04));
+				ctx.rotate((-10 + arm * 7) * (Math.PI / 180));
+				const band = ctx.createRadialGradient(0, 0, 30, 0, 0, width * 0.38);
+				band.addColorStop(0, 'rgba(160, 210, 255, 0.08)');
+				band.addColorStop(0.28, 'rgba(125, 110, 255, 0.04)');
+				band.addColorStop(1, 'rgba(0,0,0,0)');
+				ctx.scale(2.8, 0.22);
+				ctx.fillStyle = band;
+				ctx.beginPath();
+				ctx.arc(0, 0, width * 0.38, 0, Math.PI * 2);
+				ctx.fill();
+				ctx.restore();
+			}
+
+			for (let i = 0; i < 7200; i++) {
+				const x = Math.random() * width;
+				const y = Math.random() * height;
+				const bright = Math.random() ** 5;
+				const size = bright > 0.84 ? 1.05 : bright > 0.52 ? 0.62 : 0.34;
+				const alpha = 0.045 + bright * 0.42;
+				const hue = Math.random();
+				const tint =
+					hue < 0.08 ? `255,226,170` : hue > 0.92 ? `170,220,255` : `235,242,255`;
+				ctx.fillStyle = `rgba(${tint}, ${alpha})`;
+				ctx.beginPath();
+				ctx.arc(x, y, size, 0, Math.PI * 2);
+				ctx.fill();
+			}
+
+			const texture = new THREE.CanvasTexture(canvas);
+			texture.colorSpace = THREE.SRGBColorSpace;
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			return texture;
+		}
+
+		function makeStarGlowTexture(hex) {
+			const cacheKey = `glow:${hex || '#f2efe6'}`;
+			if (textureCache.has(cacheKey)) return textureCache.get(cacheKey);
+			const color = new THREE.Color(hex || '#f2efe6');
+			const r = Math.round(color.r * 255);
+			const g = Math.round(color.g * 255);
+			const b = Math.round(color.b * 255);
+			const size = 192;
+			const canvas = document.createElement('canvas');
+			canvas.width = size;
+			canvas.height = size;
+			const ctx = canvas.getContext('2d');
+			const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+			gradient.addColorStop(0, 'rgba(255,255,255,1)');
+			gradient.addColorStop(0.06, `rgba(255,255,255,0.88)`);
+			gradient.addColorStop(0.18, `rgba(${r},${g},${b},0.62)`);
+			gradient.addColorStop(0.38, `rgba(${r},${g},${b},0.27)`);
+			gradient.addColorStop(0.68, `rgba(${r},${g},${b},0.08)`);
+			gradient.addColorStop(1, `rgba(${r},${g},${b},0)`);
+			ctx.fillStyle = gradient;
+			ctx.fillRect(0, 0, size, size);
+			const texture = new THREE.CanvasTexture(canvas);
+			texture.colorSpace = THREE.SRGBColorSpace;
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			texture.generateMipmaps = false;
+			textureCache.set(cacheKey, texture);
+			return texture;
+		}
+
+		function hashString(value) {
+			let hash = 2166136261;
+			for (let index = 0; index < value.length; index++) {
+				hash ^= value.charCodeAt(index);
+				hash = Math.imul(hash, 16777619);
+			}
+			return hash >>> 0;
+		}
+
+		function seededFloat(seed) {
+			const value = Math.sin(seed * 12.9898) * 43758.5453;
+			return value - Math.floor(value);
+		}
+
+		function makeStellarCoreTexture(hex, seedText = '') {
+			const cacheKey = `core:${hex || '#f2efe6'}:${seedText}`;
+			if (textureCache.has(cacheKey)) return textureCache.get(cacheKey);
+			const color = new THREE.Color(hex || '#f2efe6');
+			const r = Math.round(color.r * 255);
+			const g = Math.round(color.g * 255);
+			const b = Math.round(color.b * 255);
+			const seed = hashString(seedText || hex || 'node');
+			const size = 192;
+			const center = size / 2;
+			const canvas = document.createElement('canvas');
+			canvas.width = size;
+			canvas.height = size;
+			const ctx = canvas.getContext('2d');
+
+			ctx.clearRect(0, 0, size, size);
+			ctx.globalCompositeOperation = 'lighter';
+
+			const outer = ctx.createRadialGradient(center, center, 0, center, center, center);
+			outer.addColorStop(0, 'rgba(255,255,255,1)');
+			outer.addColorStop(0.08, 'rgba(255,255,255,0.96)');
+			outer.addColorStop(0.2, `rgba(${r},${g},${b},0.72)`);
+			outer.addColorStop(0.44, `rgba(${r},${g},${b},0.28)`);
+			outer.addColorStop(0.72, `rgba(${r},${g},${b},0.08)`);
+			outer.addColorStop(1, `rgba(${r},${g},${b},0)`);
+			ctx.fillStyle = outer;
+			ctx.fillRect(0, 0, size, size);
+
+			ctx.save();
+			ctx.translate(center, center);
+			ctx.rotate(seededFloat(seed) * Math.PI);
+			for (let i = 0; i < 4; i++) {
+				const length = 52 + seededFloat(seed + i + 7) * 26;
+				const width = i % 2 === 0 ? 2.2 : 1.2;
+				const spike = ctx.createLinearGradient(-length, 0, length, 0);
+				spike.addColorStop(0, `rgba(${r},${g},${b},0)`);
+				spike.addColorStop(0.46, 'rgba(255,255,255,0.12)');
+				spike.addColorStop(0.5, 'rgba(255,255,255,0.42)');
+				spike.addColorStop(0.54, 'rgba(255,255,255,0.12)');
+				spike.addColorStop(1, `rgba(${r},${g},${b},0)`);
+				ctx.fillStyle = spike;
+				ctx.fillRect(-length, -width / 2, length * 2, width);
+				ctx.rotate(Math.PI / 4);
+			}
+			ctx.restore();
+
+			for (let i = 0; i < 9; i++) {
+				const angle = seededFloat(seed + i * 17) * Math.PI * 2;
+				const radius = 18 + seededFloat(seed + i * 29) * 58;
+				const dotSize = 0.75 + seededFloat(seed + i * 41) * 1.4;
+				ctx.fillStyle = `rgba(255,255,255,${0.1 + seededFloat(seed + i * 53) * 0.22})`;
+				ctx.beginPath();
+				ctx.arc(center + Math.cos(angle) * radius, center + Math.sin(angle) * radius, dotSize, 0, Math.PI * 2);
+				ctx.fill();
+			}
+
+			ctx.globalCompositeOperation = 'source-over';
+			const texture = new THREE.CanvasTexture(canvas);
+			texture.colorSpace = THREE.SRGBColorSpace;
+			texture.minFilter = THREE.LinearFilter;
+			texture.magFilter = THREE.LinearFilter;
+			texture.generateMipmaps = false;
+			textureCache.set(cacheKey, texture);
+			return texture;
+		}
+
+		function makeOrbitCircle(radius, color, opacity, axis = 'xz') {
+			const points = [];
+			for (let i = 0; i <= 192; i++) {
+				const angle = (i / 192) * Math.PI * 2;
+				if (axis === 'xy') points.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, 0));
+				else if (axis === 'yz') points.push(new THREE.Vector3(0, Math.cos(angle) * radius, Math.sin(angle) * radius));
+				else points.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius));
+			}
+			const geometry = new THREE.BufferGeometry().setFromPoints(points);
+			const material = new THREE.LineBasicMaterial({
+				color,
+				transparent: true,
+				opacity,
+				blending: THREE.AdditiveBlending,
+				depthWrite: false,
+			});
+			return new THREE.Line(geometry, material);
+		}
+
+		function orbitPosition(node, time = 0) {
+			const level = node.level || 0;
+			if (level === 0) {
+				return {
+					position: new THREE.Vector3(0, 0, 0),
+					fourthPhase: Math.sin(time * 0.02),
+					radius: 0,
+				};
+			}
+			const levelNodes = graph.nodes.filter((candidate) => candidate.level === level).sort((a, b) => a.id.localeCompare(b.id));
+			const index = Math.max(0, levelNodes.findIndex((candidate) => candidate.id === node.id));
+			const count = Math.max(1, levelNodes.length);
+			const radius = levelRadius(level);
+			const golden = Math.PI * (3 - Math.sqrt(5));
+			const y = count === 1 ? 0 : 1 - (index / (count - 1)) * 2;
+			const shell = Math.sqrt(Math.max(0, 1 - y * y));
+			const drift = time * (0.0024 / Math.max(1, level)) * (level % 2 ? 1 : -1);
+			const theta = index * golden + (node.angle || 0) * 0.35 + drift;
+			const tilt = level * 0.37;
+			const base = new THREE.Vector3(Math.cos(theta) * shell * radius, y * radius * 0.72, Math.sin(theta) * shell * radius);
+			base.applyAxisAngle(new THREE.Vector3(1, 0, 0), tilt);
+			base.applyAxisAngle(new THREE.Vector3(0, 0, 1), level * 0.13);
+			const fourthPhase = Math.sin(time * 0.02 + level + theta);
+			return {
+				position: base,
+				fourthPhase,
+				radius,
+			};
+		}
+
+		function addStarfield() {
+			const sky = new THREE.Mesh(
+				new THREE.SphereGeometry(420, 64, 32),
+				new THREE.MeshBasicMaterial({
+					map: makeSkyTexture(),
+					side: THREE.BackSide,
+					depthWrite: false,
+					toneMapped: false,
+				})
+			);
+			universeGroup.add(sky);
+
+			const starTexture = makeRadialTexture('rgba(255,255,255,1)', 'rgba(255,255,255,0)');
+			[
+				{ count: 5200, radius: 280, size: 0.34, opacity: 0.22, color: 0xd7e6ff, speed: 0.000018, depth: 0.08 },
+				{ count: 2100, radius: 176, size: 0.26, opacity: 0.2, color: 0xfff3cf, speed: 0.000035, depth: 0.16 },
+				{ count: 1100, radius: 108, size: 0.22, opacity: 0.18, color: 0x9bdcff, speed: 0.000055, depth: 0.24 },
+			].forEach((layer) => {
+				const positions = new Float32Array(layer.count * 3);
+				for (let i = 0; i < layer.count; i++) {
+					const arm = i % 5;
+					const turn = Math.random() * Math.PI * 7 + arm * ((Math.PI * 2) / 5);
+					const radius = Math.pow(Math.random(), 0.62) * layer.radius;
+					const spiral = turn + radius * 0.045;
+					const thickness = (Math.random() - 0.5) * layer.radius * 0.42;
+					const jitter = (Math.random() - 0.5) * 10;
+					positions[i * 3] = Math.cos(spiral) * radius + jitter;
+					positions[i * 3 + 1] = thickness;
+					positions[i * 3 + 2] = Math.sin(spiral) * radius + (Math.random() - 0.5) * 26;
+				}
+				const geometry = new THREE.BufferGeometry();
+				geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+				const material = new THREE.PointsMaterial({
+					color: layer.color,
+					size: layer.size,
+					sizeAttenuation: true,
+					map: starTexture,
+					alphaTest: 0.02,
+					transparent: true,
+					opacity: layer.opacity,
+					depthWrite: false,
+					blending: THREE.AdditiveBlending,
+				});
+				const stars = new THREE.Points(geometry, material);
+				stars.userData = { speed: layer.speed, depth: layer.depth };
+				starLayers.push(stars);
+				universeGroup.add(stars);
+			});
+		}
+
+		function addNebula() {
+			// Intentionally empty: the UI should read as crisp cosmic memory space, not bokeh.
+		}
+
+		function focusState() {
+			const nodeIds = new Set();
+			const edgeIds = new Set();
+			const distances = new Map();
+			if (selectedOrbitLevel !== null) {
+				const orbitNodeIds = new Set(orbitNodes(selectedOrbitLevel).map((node) => node.id));
+				orbitNodeIds.forEach((id) => {
+					nodeIds.add(id);
+					distances.set(id, 0);
+				});
+				graph.edges.forEach((edge) => {
+					const touchesOrbit = orbitNodeIds.has(edge.source) || orbitNodeIds.has(edge.target);
+					if (!touchesOrbit) return;
+					edgeIds.add(edge.id);
+					nodeIds.add(edge.source);
+					nodeIds.add(edge.target);
+					if (!distances.has(edge.source)) distances.set(edge.source, 1);
+					if (!distances.has(edge.target)) distances.set(edge.target, 1);
+				});
+				return { nodeIds, edgeIds, distances, active: true };
+			}
+			if (selectedEdgeId) {
+				const edge = edgesById.get(selectedEdgeId);
+				if (edge) {
+					nodeIds.add(edge.source);
+					nodeIds.add(edge.target);
+					edgeIds.add(edge.id);
+					distances.set(edge.source, 0);
+					distances.set(edge.target, 0);
+				}
+				return { nodeIds, edgeIds, distances, active: true };
+			}
+			nodeIds.add(selectedId);
+			distances.set(selectedId, 0);
+			graph.edges.forEach((edge) => {
+				if (edge.source === selectedId || edge.target === selectedId) {
+					edgeIds.add(edge.id);
+					nodeIds.add(edge.source);
+					nodeIds.add(edge.target);
+					distances.set(edge.source, Math.min(distances.get(edge.source) ?? 9, 1));
+					distances.set(edge.target, Math.min(distances.get(edge.target) ?? 9, 1));
+				}
+			});
+			const queue = [...distances.entries()];
+			for (let index = 0; index < queue.length; index++) {
+				const [id, distance] = queue[index];
+				if (distance >= 4) continue;
+				graph.edges.forEach((edge) => {
+					if (edge.source !== id && edge.target !== id) return;
+					const other = edge.source === id ? edge.target : edge.source;
+					if ((distances.get(other) ?? 99) <= distance + 1) return;
+					distances.set(other, distance + 1);
+					queue.push([other, distance + 1]);
+				});
+			}
+			return { nodeIds, edgeIds, distances, active: true };
+		}
+
+		function dimForDistance(focus, id) {
+			const distance = focus.distances.get(id);
+			if (distance === 0) return 1;
+			if (distance === 1) return 0.46;
+			if (distance === 2) return 0.23;
+			if (distance === 3) return 0.12;
+			return 0.05;
+		}
+
+		function nodeFocusTarget(focus, node) {
+			const dim = dimForDistance(focus, node.id);
+			if (!selectedEdgeId) return dim;
+			const edge = edgesById.get(selectedEdgeId);
+			if (!edge) return dim;
+			if (edge.source === node.id || edge.target === node.id) return 0.62;
+			return dim;
+		}
+
+		function nodeSizeForFocus(dim) {
+			if (dim >= 0.58) return THREE.MathUtils.lerp(1.12, 1.82, (dim - 0.58) / 0.42);
+			if (dim >= 0.1) return THREE.MathUtils.lerp(0.9, 1.12, (dim - 0.1) / 0.48);
+			return THREE.MathUtils.lerp(0.82, 0.9, dim / 0.1);
+		}
+
+		function nodeCoreScaleForFocus(dim) {
+			const stellarSpread = THREE.MathUtils.lerp(1.65, 2.08, THREE.MathUtils.smoothstep(dim, 0.05, 1));
+			return nodeSizeForFocus(dim) * stellarSpread;
+		}
+
+		function nodeOpacityForFocus(dim, isRoot = false) {
+			if (dim >= 0.58) return THREE.MathUtils.lerp(0.62, 0.98, (dim - 0.58) / 0.42);
+			if (dim >= 0.1) return THREE.MathUtils.lerp(0.22, 0.62, (dim - 0.1) / 0.48);
+			return Math.max(isRoot ? 0.24 : 0.13, 0.13 + dim * 0.5);
+		}
+
+		function nodeColorForFocus(node, dim) {
+			const color = new THREE.Color(orbitColor(node.level || 0));
+			const tint = THREE.MathUtils.lerp(0.42, 0.08, THREE.MathUtils.smoothstep(dim, 0.05, 1));
+			return new THREE.Color('#ffffff').lerp(color, tint);
+		}
+
+		function glowOpacityForFocus(dim) {
+			if (dim >= 0.58) return THREE.MathUtils.lerp(0.26, 0.82, (dim - 0.58) / 0.42);
+			if (dim >= 0.1) return THREE.MathUtils.lerp(0.045, 0.26, (dim - 0.1) / 0.48);
+			return 0.014 + dim * 0.14;
+		}
+
+		function glowScaleForFocus(dim) {
+			if (dim >= 0.58) return THREE.MathUtils.lerp(5.8, 12.6, (dim - 0.58) / 0.42);
+			return 2.8 + dim * 4.8;
+		}
+
+		function edgeOpacityForFocus(dim) {
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.18, 0.36, (dim - 0.58) / 0.42) : dim * 0.07;
+		}
+
+		function edgeHaloOpacityForFocus(dim) {
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.04, 0.16, (dim - 0.58) / 0.42) : dim * 0.008;
+		}
+
+		function edgeTubeOpacityForFocus(dim) {
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.025, 0.09, (dim - 0.58) / 0.42) : 0;
+		}
+
+		function edgeShipOpacityForFocus(dim) {
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.24, 0.48, (dim - 0.58) / 0.42) : 0.045 + dim * 0.16;
+		}
+
+		function edgeShipScaleForFocus(dim) {
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.32, 0.62, (dim - 0.58) / 0.42) : 0.14 + dim * 0.2;
+		}
+
+		function orbitFocusTargetForLevel(level, focusLevels) {
+			if (!focusLevels.size) return 0.24;
+			if (focusLevels.has(0)) return level === 1 ? 0.64 : 0.2;
+			if (focusLevels.has(level)) return 0.86;
+			const nearFocusedLevel = [...focusLevels].some((focusLevel) => Math.abs(focusLevel - level) === 1);
+			return nearFocusedLevel ? 0.34 : 0.08;
+		}
+
+		function orbitOpacityForFocus(baseOpacity, dim) {
+			return baseOpacity * THREE.MathUtils.lerp(0.38, 2.35, dim);
+		}
+
+		function dampFocus(current, target, delta, speed = 3.6) {
+			return THREE.MathUtils.damp(current, target, speed, delta);
+		}
+
+		function connectedEdges(id) {
+			return graph.edges.filter((edge) => edge.source === id || edge.target === id);
+		}
+
+		function orbitColor(level) {
+			return orbitPalette[Math.min(level, orbitPalette.length - 1)];
+		}
+
+		function orbitNodes(level) {
+			return graph.nodes
+				.filter((node) => node.level === level)
+				.sort((a, b) => a.path.join('/').localeCompare(b.path.join('/')) || a.title.localeCompare(b.title));
+		}
+
+		function orbitTitle(level) {
+			if (level === 0) return 'Root Orbit';
+			const nodes = orbitNodes(level);
+			const groupLabels = [...new Set(nodes.map((node) => node.groupLabel || node.group).filter(Boolean))];
+			if (groupLabels.length === 1) return `${groupLabels[0]} Orbit`;
+			if (groupLabels.length > 1 && groupLabels.length <= 3) return `${groupLabels.join(' / ')} Orbit`;
+			return `Orbit ${level}`;
+		}
+
+		function orbitSummary(level) {
+			const nodes = orbitNodes(level);
+			if (level === 0) return 'The origin concept that anchors the whole graph.';
+			const parentTitles = [...new Set(nodes.map((node) => nodesById.get(node.parent)?.title).filter(Boolean))];
+			const parentText = parentTitles.length === 1 ? ` under ${parentTitles[0]}` : '';
+			return `A composed abstraction made from ${nodes.length} node${nodes.length === 1 ? '' : 's'}${parentText}. It collects every concept at level ${level} into one selectable orbit.`;
+		}
+
+		function orbitHtml(level) {
+			const nodes = orbitNodes(level);
+			const groups = [...new Set(nodes.map((node) => node.groupLabel || node.group).filter(Boolean))];
+			const groupText = groups.length ? `Groups: ${groups.join(', ')}.` : '';
+			return `<p>${orbitSummary(level)}</p>${groupText ? `<p>${groupText}</p>` : ''}`;
+		}
+
+		function focusOrbitLevels() {
+			const levels = new Set();
+			if (selectedOrbitLevel !== null) {
+				levels.add(selectedOrbitLevel);
+				return levels;
+			}
+			if (selectedEdgeId) {
+				const edge = edgesById.get(selectedEdgeId);
+				const source = edge ? nodesById.get(edge.source) : null;
+				const target = edge ? nodesById.get(edge.target) : null;
+				if (source) levels.add(source.level || 0);
+				if (target) levels.add(target.level || 0);
+				return levels;
+			}
+			const node = nodesById.get(selectedId);
+			if (node) levels.add(node.level || 0);
+			return levels;
+		}
+
+		function focusLocalPosition(time = 0) {
+			if (selectedOrbitLevel !== null) {
+				return new THREE.Vector3(0, selectedOrbitLevel * 0.52, 0);
+			}
+			if (selectedEdgeId) {
+				const edge = edgesById.get(selectedEdgeId);
+				const source = edge ? nodesById.get(edge.source) : null;
+				const target = edge ? nodesById.get(edge.target) : null;
+				if (source && target) {
+					const sourcePosition = orbitPosition(source, time).position;
+					const targetPosition = orbitPosition(target, time).position;
+					const midpoint = sourcePosition.clone().lerp(targetPosition, 0.5);
+					midpoint.y += 1.2 + (target.level || 0) * 0.22;
+					return midpoint;
+				}
+			}
+			const node = nodesById.get(selectedId) || nodesById.get('neo-koinonia');
+			return orbitPosition(node, time).position;
+		}
+
+		function currentCameraDirection() {
+			const offset = camera.position.clone().sub(cameraLookCurrent);
+			if (offset.length() > 0.001) {
+				cameraDirection.copy(offset.normalize());
+			}
+			if (cameraDirection.length() < 0.001) {
+				cameraDirection.set(0.22, 0.15, 1).normalize();
+			}
+			return cameraDirection;
+		}
+
+		function setFocusDistance(distance) {
+			focusDistance = THREE.MathUtils.clamp(distance, minFocusDistance, maxFocusDistance);
+		}
+
+		function beginFocusTransition() {
+			focusStartedAt = performance.now() * 0.001;
+			focusProgress = 0;
+		}
+
+		function labelOpacityFor(node, dim) {
+			if (selectedEdgeId) {
+				const edge = edgesById.get(selectedEdgeId);
+				if (edge && (edge.source === node.id || edge.target === node.id)) return 0.96;
+			}
+			if (!selectedEdgeId && selectedOrbitLevel === null && node.id === selectedId) return 1;
+			if (dim >= 0.9) return 0.98;
+			if (dim >= 0.58) return 0.72;
+			if (dim >= 0.34) return focusDistance < 44 ? 0.28 : 0.42;
+			if (dim >= 0.18) return focusDistance < 52 ? 0 : 0.18;
+			return 0;
+		}
+
+		function labelScaleFor(node, position, dim) {
+			const isRoot = node.id === 'neo-koinonia';
+			const distance = camera.position.distanceTo(position);
+			const distanceDamp = THREE.MathUtils.clamp(distance / 48, 0.5, 1.48);
+			return distanceDamp * (dim >= 0.9 ? 1.46 : dim >= 0.58 ? 1.18 : isRoot ? 1.05 : 1);
+		}
+
+		function placeReadableLabel(localPosition, group, options = {}) {
+			worldScratch.copy(localPosition);
+			group.localToWorld(worldScratch);
+			cameraScratch.copy(camera.position).sub(worldScratch).normalize().multiplyScalar(options.depth ?? 1.45);
+			cameraRightScratch.setFromMatrixColumn(camera.matrixWorld, 0).multiplyScalar(options.side ?? 0);
+			cameraUpScratch.setFromMatrixColumn(camera.matrixWorld, 1).multiplyScalar(options.lift ?? 0.85);
+			worldScratch.add(cameraScratch);
+			worldScratch.add(cameraRightScratch);
+			worldScratch.add(cameraUpScratch);
+			return group.worldToLocal(worldScratch.clone());
+		}
+
+		function renderGraph() {
+			clearGroup(nodeGroup);
+			clearGroup(edgeGroup);
+			clearGroup(orbitGroup);
+			clearLabels();
+			interactive.length = 0;
+			shipObjects.length = 0;
+			nodeObjects.clear();
+			edgeObjects.clear();
+			orbitObjects.clear();
+			const visible = visibleNodeIds();
+			const focus = focusState();
+			const levels = new Set(graph.nodes.filter((node) => visible.has(node.id)).map((node) => node.level));
+			const focusedOrbitLevels = focusOrbitLevels();
+
+			levels.forEach((level) => {
+				if (level === 0) return;
+				const radius = levelRadius(level);
+				const group = new THREE.Group();
+				group.rotation.x = level * 0.37;
+				group.rotation.z = level * 0.13;
+				const shellColor = new THREE.Color(orbitColor(level)).getHex();
+				const targetFocusDim = orbitFocusTargetForLevel(level, focusedOrbitLevels);
+				const currentFocusDim = orbitFocusVisuals.get(level) ?? targetFocusDim;
+				[
+					{ ringRadius: radius, baseOpacity: 0.13, axis: 'xz' },
+					{ ringRadius: radius * 0.72, baseOpacity: 0.075, axis: 'xy' },
+					{ ringRadius: radius * 0.72, baseOpacity: 0.055, axis: 'yz' },
+				].forEach((ring) => {
+					const line = makeOrbitCircle(
+						ring.ringRadius,
+						shellColor,
+						orbitOpacityForFocus(ring.baseOpacity, currentFocusDim),
+						ring.axis
+					);
+					line.userData = { type: 'orbit-ring', level, baseOpacity: ring.baseOpacity, currentFocusDim, targetFocusDim };
+					group.add(line);
+				});
+
+				const label = makeTextSprite(orbitTitle(level), orbitColor(level), { orbit: true, prominent: selectedOrbitLevel === level });
+				label.userData = { type: 'orbit-label', level, radius, baseScale: label.scale.clone(), currentFocusDim, targetFocusDim };
+				label.material.opacity = THREE.MathUtils.lerp(0.34, 0.92, currentFocusDim);
+				label.renderOrder = 36;
+				group.add(label);
+
+				const hit = new THREE.Mesh(
+					new THREE.SphereGeometry(Math.max(1.7, radius * 0.085), 18, 18),
+					new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
+				);
+				hit.userData = { type: 'orbit', level };
+				group.add(hit);
+				interactive.push(hit);
+				orbitObjects.set(level, { group, label, hit });
+				orbitGroup.add(group);
+			});
+
+			graph.edges
+				.filter((edge) => visible.has(edge.source) && visible.has(edge.target))
+				.forEach((edge, index) => {
+					const sourceDim = dimForDistance(focus, edge.source);
+					const targetDim = dimForDistance(focus, edge.target);
+					const isSelectedRelation = selectedEdgeId === edge.id;
+					const isContextEdge = focus.edgeIds.has(edge.id);
+					const targetFocusDim = isSelectedRelation ? 1 : isContextEdge ? 0.42 : Math.min(sourceDim, targetDim);
+					const currentFocusDim = edgeFocusVisuals.get(edge.id) ?? targetFocusDim;
+					const source = orbitPosition(nodesById.get(edge.source)).position;
+					const target = orbitPosition(nodesById.get(edge.target)).position;
+					const mid = source.clone().lerp(target, 0.5);
+					mid.y += 1.2 + nodesById.get(edge.target).level * 0.22;
+					const curve = new THREE.CatmullRomCurve3([source, mid, target]);
+					const geometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(18));
+					const material = new THREE.LineBasicMaterial({
+						color: new THREE.Color(orbitColor(nodesById.get(edge.target)?.level || 0)),
+						transparent: true,
+						opacity: edgeOpacityForFocus(currentFocusDim),
+						blending: THREE.AdditiveBlending,
+						depthWrite: false,
+					});
+					const line = new THREE.Line(geometry, material);
+					const targetLevel = nodesById.get(edge.target)?.level || 0;
+					const haloGeometry = new THREE.BufferGeometry().setFromPoints(curve.getPoints(18));
+					const halo = new THREE.Line(
+						haloGeometry,
+						new THREE.LineBasicMaterial({
+							color: new THREE.Color(orbitColor(targetLevel)).lerp(new THREE.Color('#ffffff'), 0.32),
+							transparent: true,
+							opacity: edgeHaloOpacityForFocus(currentFocusDim),
+							blending: THREE.AdditiveBlending,
+							depthTest: false,
+							depthWrite: false,
+						})
+					);
+					halo.renderOrder = 12;
+					const tube = new THREE.Mesh(
+						new THREE.TubeGeometry(curve, 36, 0.035 + currentFocusDim * 0.035, 8, false),
+						new THREE.MeshBasicMaterial({
+							color: new THREE.Color(orbitColor(targetLevel)).lerp(new THREE.Color('#ffffff'), 0.45),
+							transparent: true,
+							opacity: edgeTubeOpacityForFocus(currentFocusDim),
+							blending: THREE.AdditiveBlending,
+							depthTest: false,
+							depthWrite: false,
+							toneMapped: false,
+						})
+					);
+					tube.renderOrder = 11;
+					const ship = new THREE.Sprite(
+						new THREE.SpriteMaterial({
+							map: makeStarGlowTexture(orbitColor(targetLevel)),
+							transparent: true,
+							opacity: edgeShipOpacityForFocus(currentFocusDim),
+							blending: THREE.AdditiveBlending,
+							depthWrite: false,
+							toneMapped: false,
+						})
+					);
+					ship.scale.setScalar(edgeShipScaleForFocus(currentFocusDim));
+					line.userData = { type: 'edge', id: edge.id, currentFocusDim, targetFocusDim };
+					ship.userData = { edgeId: edge.id, phase: index * 0.173 };
+					const pulses = [0, 0.33, 0.66].map((phaseOffset) => {
+						const pulse = new THREE.Sprite(
+							new THREE.SpriteMaterial({
+								map: makeStarGlowTexture('#ffffff'),
+								color: new THREE.Color(orbitColor(targetLevel)),
+								transparent: true,
+								opacity: edgeHaloOpacityForFocus(currentFocusDim),
+								blending: THREE.AdditiveBlending,
+								depthTest: false,
+								depthWrite: false,
+								toneMapped: false,
+							})
+						);
+						pulse.scale.setScalar(0.2 + currentFocusDim * 0.5);
+						pulse.renderOrder = 18;
+						pulse.userData = { phaseOffset };
+						return pulse;
+					});
+					edgeObjects.set(edge.id, { line, halo, tube, ship, pulses });
+					shipObjects.push(ship);
+					edgeGroup.add(tube, halo, line, ship, ...pulses);
+					interactive.push(line);
+				});
+
+			graph.nodes
+				.filter((node) => visible.has(node.id))
+				.forEach((node) => {
+					const targetFocusDim = nodeFocusTarget(focus, node);
+					const currentFocusDim = nodeFocusVisuals.get(node.id) ?? targetFocusDim;
+					const isRoot = node.id === 'neo-koinonia';
+					const hotColor = nodeColorForFocus(node, currentFocusDim);
+					const naturalSize = isRoot ? 0.96 : Math.max(0.3, 0.58 - node.level * 0.045);
+					const material = new THREE.SpriteMaterial({
+						map: makeStellarCoreTexture(orbitColor(node.level || 0), node.id),
+						color: hotColor,
+						transparent: true,
+						opacity: nodeOpacityForFocus(currentFocusDim, isRoot),
+						blending: THREE.AdditiveBlending,
+						depthWrite: false,
+						toneMapped: false,
+					});
+					const mesh = new THREE.Sprite(material);
+					mesh.scale.setScalar(naturalSize * nodeCoreScaleForFocus(currentFocusDim));
+					mesh.renderOrder = 8;
+					mesh.userData = { type: 'node', id: node.id, naturalSize, bornAt: performance.now(), currentFocusDim, targetFocusDim, seed: hashString(node.id) };
+					nodeGroup.add(mesh);
+					nodeObjects.set(node.id, mesh);
+
+					const glow = new THREE.Sprite(
+						new THREE.SpriteMaterial({
+							map: makeStarGlowTexture(orbitColor(node.level || 0)),
+							transparent: true,
+							opacity: glowOpacityForFocus(currentFocusDim),
+							blending: THREE.AdditiveBlending,
+							depthWrite: false,
+							toneMapped: false,
+						})
+					);
+					glow.scale.setScalar(naturalSize * glowScaleForFocus(currentFocusDim));
+					glow.renderOrder = 5;
+					nodeGroup.add(glow);
+					nodeObjects.set(`${node.id}:glow`, glow);
+
+					const hit = new THREE.Mesh(
+						new THREE.SphereGeometry(naturalSize * 3.25, 18, 18),
+						new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
+					);
+					hit.userData = { type: 'node', id: node.id };
+					nodeGroup.add(hit);
+					nodeObjects.set(`${node.id}:hit`, hit);
+					interactive.push(hit);
+
+					const label = makeTextSprite(node.title, orbitColor(node.level || 0), { prominent: targetFocusDim >= 0.9 });
+					label.userData = { followsNode: node.id, baseScale: label.scale.clone() };
+					label.material.opacity = labelOpacityFor(node, currentFocusDim);
+					nodeGroup.add(label);
+					nodeObjects.set(`${node.id}:label`, label);
+				});
+
+			inspector.count.textContent = `${visible.size} nodes`;
+		}
+
+		function updatePositions(time, delta) {
+			const visible = visibleNodeIds();
+			orbitGroup.children.forEach((group) => {
+				group.children.forEach((line) => {
+					if (line.userData.type !== 'orbit-ring') return;
+					const currentFocusDim = dampFocus(
+						line.userData.currentFocusDim ?? line.userData.targetFocusDim,
+						line.userData.targetFocusDim,
+						delta,
+						3.2
+					);
+					line.userData.currentFocusDim = currentFocusDim;
+					orbitFocusVisuals.set(line.userData.level, currentFocusDim);
+					line.material.opacity = orbitOpacityForFocus(line.userData.baseOpacity, currentFocusDim);
+				});
+			});
+			orbitObjects.forEach((entry, level) => {
+				const radius = levelRadius(level);
+				const currentFocusDim = orbitFocusVisuals.get(level) ?? entry.label.userData.currentFocusDim ?? 0.24;
+				const angle = time * (0.006 / Math.max(1, level)) + level * 0.62;
+				const labelPosition = new THREE.Vector3(Math.cos(angle) * radius * 0.84, radius * 0.18 + 0.35, Math.sin(angle) * radius * 0.84);
+				entry.label.position.copy(labelPosition);
+				entry.hit.position.copy(labelPosition);
+				entry.hit.scale.setScalar(THREE.MathUtils.lerp(0.9, 1.9, currentFocusDim));
+				entry.label.material.opacity = THREE.MathUtils.lerp(0.28, selectedOrbitLevel === level ? 1 : 0.82, currentFocusDim);
+				if (entry.label.userData.baseScale) {
+					entry.label.scale.copy(entry.label.userData.baseScale).multiplyScalar(THREE.MathUtils.lerp(0.88, selectedOrbitLevel === level ? 1.34 : 1.08, currentFocusDim));
+				}
+			});
+
+			graph.nodes
+				.filter((node) => visible.has(node.id))
+				.forEach((node) => {
+					const { position, fourthPhase } = orbitPosition(node, time);
+					const mesh = nodeObjects.get(node.id);
+					const label = nodeObjects.get(`${node.id}:label`);
+					const hit = nodeObjects.get(`${node.id}:hit`);
+					const glow = nodeObjects.get(`${node.id}:glow`);
+					if (!mesh) return;
+					mesh.position.copy(position);
+					if (hit) hit.position.copy(position);
+					const currentFocusDim = dampFocus(mesh.userData.currentFocusDim, mesh.userData.targetFocusDim, delta);
+					mesh.userData.currentFocusDim = currentFocusDim;
+					nodeFocusVisuals.set(node.id, currentFocusDim);
+					const visualDiameter = mesh.userData.naturalSize * nodeCoreScaleForFocus(currentFocusDim);
+					const visualRadius = visualDiameter * 0.5;
+					const pulse = 1 + fourthPhase * 0.12;
+					mesh.scale.setScalar(visualDiameter * pulse);
+					mesh.material.opacity = nodeOpacityForFocus(currentFocusDim, node.id === 'neo-koinonia');
+					mesh.material.color.copy(nodeColorForFocus(node, currentFocusDim));
+					mesh.material.rotation = time * (0.018 + node.level * 0.002) + mesh.userData.seed * 0.0001;
+					if (hit) hit.scale.setScalar(Math.max(1, nodeSizeForFocus(currentFocusDim)));
+					if (glow) {
+						glow.position.copy(position);
+						const glowScale = mesh.userData.naturalSize * glowScaleForFocus(currentFocusDim);
+						glow.scale.setScalar(
+							glowScale * (1 + Math.abs(fourthPhase) * 0.075)
+						);
+						glow.material.opacity = glowOpacityForFocus(currentFocusDim);
+					}
+					mesh.rotation.y += 0.005 + node.level * 0.001;
+					if (label) {
+						const isSelectedNodeLabel = !selectedEdgeId && node.id === selectedId;
+						const labelBase = isSelectedNodeLabel
+							? position.clone().add(new THREE.Vector3(0, visualRadius * 1.6 + 1.15, 0))
+							: position.clone().add(new THREE.Vector3(0, visualRadius * 1.18 + 0.44, 0));
+						const labelSeed = ((mesh.userData.seed % 200) / 200 - 0.5) * 0.9;
+						label.renderOrder = isSelectedNodeLabel ? 72 : 32;
+						label.position.copy(
+							placeReadableLabel(labelBase, nodeGroup, {
+								depth: isSelectedNodeLabel ? visualRadius + 4.8 : currentFocusDim >= 0.9 ? 3.2 : 1.6,
+								lift: isSelectedNodeLabel ? visualRadius + 2.6 : currentFocusDim >= 0.9 ? 2.65 : 0.9,
+								side: isSelectedNodeLabel ? 1.25 : currentFocusDim >= 0.9 ? labelSeed : 0,
+							})
+						);
+						label.material.opacity = labelOpacityFor(node, currentFocusDim);
+						if (label.userData.baseScale) {
+							label.scale.copy(label.userData.baseScale).multiplyScalar(labelScaleFor(node, position, currentFocusDim));
+						}
+					}
+				});
+
+			graph.edges
+				.filter((edge) => visible.has(edge.source) && visible.has(edge.target))
+				.forEach((edge) => {
+					const source = orbitPosition(nodesById.get(edge.source), time).position;
+					const target = orbitPosition(nodesById.get(edge.target), time).position;
+					const mid = source.clone().lerp(target, 0.5);
+					mid.y += 1.2 + nodesById.get(edge.target).level * 0.22;
+					const curve = new THREE.CatmullRomCurve3([source, mid, target]);
+					const entry = edgeObjects.get(edge.id);
+					if (!entry) return;
+					entry.line.geometry.setFromPoints(curve.getPoints(18));
+					entry.line.geometry.attributes.position.needsUpdate = true;
+					entry.halo.geometry.setFromPoints(curve.getPoints(18));
+					entry.halo.geometry.attributes.position.needsUpdate = true;
+					const currentFocusDim = dampFocus(
+						entry.line.userData.currentFocusDim,
+						entry.line.userData.targetFocusDim,
+						delta,
+						3.6
+					);
+					entry.line.userData.currentFocusDim = currentFocusDim;
+					edgeFocusVisuals.set(edge.id, currentFocusDim);
+					entry.line.material.opacity = edgeOpacityForFocus(currentFocusDim);
+					entry.halo.material.opacity = edgeHaloOpacityForFocus(currentFocusDim);
+					entry.tube.geometry.dispose();
+					entry.tube.geometry = new THREE.TubeGeometry(curve, 36, 0.035 + currentFocusDim * 0.035, 8, false);
+					entry.tube.material.opacity = edgeTubeOpacityForFocus(currentFocusDim);
+					const progress = (time * (0.024 + currentFocusDim * 0.035) + entry.ship.userData.phase) % 1;
+					const shipPosition = curve.getPoint(progress);
+					entry.ship.position.copy(shipPosition);
+					entry.ship.material.opacity = edgeShipOpacityForFocus(currentFocusDim);
+					entry.ship.scale.setScalar(edgeShipScaleForFocus(currentFocusDim));
+					entry.pulses.forEach((pulse) => {
+						const pulseProgress = (progress + pulse.userData.phaseOffset) % 1;
+						pulse.position.copy(curve.getPoint(pulseProgress));
+						const pulseFlash = 0.55 + Math.sin(time * 5.2 + pulse.userData.phaseOffset * Math.PI * 2) * 0.45;
+						pulse.material.opacity = edgeHaloOpacityForFocus(currentFocusDim) * (0.55 + pulseFlash * 0.65);
+						pulse.scale.setScalar(edgeShipScaleForFocus(currentFocusDim) * (0.72 + pulseFlash * 0.36));
+					});
+				});
+		}
+
+		function fillEditorForNode(node) {
+			editor.kind.textContent = 'Node';
+			editor.groupField.hidden = false;
+			editor.title.value = node.title || '';
+			editor.description.value = node.description || '';
+			editor.tags.value = Array.isArray(node.tags) ? node.tags.join(', ') : '';
+			editor.group.value = node.group || '';
+			editor.color.value = node.color || '#f2efe6';
+			editor.body.value = node.body || '';
+		}
+
+		function fillEditorForEdge(edge) {
+			editor.kind.textContent = 'Edge';
+			editor.groupField.hidden = true;
+			editor.title.value = edge.title || '';
+			editor.description.value = '';
+			editor.tags.value = '';
+			editor.color.value = edge.color || '#f2efe6';
+			editor.body.value = edge.body || edge.label || '';
+		}
+
+		function moveCameraForNode(node, zoom = false) {
+			const depth = Math.min(5, node.level || 0);
+			currentCameraDirection();
+			setFocusDistance(node.id === 'neo-koinonia' ? (zoom ? 46 : 62) : zoom ? Math.max(28, 38 - depth * 1.25) : 54);
+			beginFocusTransition();
+		}
+
+		function moveCameraForEdge(edge, zoom = true) {
+			const source = nodesById.get(edge.source);
+			const target = nodesById.get(edge.target);
+			const depth = Math.min(5, Math.max(source?.level || 0, target?.level || 0));
+			currentCameraDirection();
+			setFocusDistance(zoom ? Math.max(30, 42 - depth * 1.1) : 56);
+			beginFocusTransition();
+		}
+
+		function moveCameraForOrbit(level) {
+			currentCameraDirection();
+			setFocusDistance(Math.min(maxFocusDistance, Math.max(42, levelRadius(level) * 2.25)));
+			beginFocusTransition();
+		}
+
+		function selectNode(id, options = {}) {
+			selectedId = id;
+			selectedEdgeId = null;
+			selectedOrbitLevel = null;
+			const node = nodesById.get(id);
+			if (!node) return;
+			if (options.expand) expanded.add(id);
+			moveCameraForNode(node, options.zoom);
+			const children = childrenById.get(id) || [];
+			const connections = connectedEdges(id);
+			inspector.kicker.textContent = 'Selected Node';
+			inspector.title.textContent = node.title;
+			inspector.level.textContent = node.level;
+			inspector.group.textContent = node.groupLabel;
+			inspector.body.innerHTML = nodeDetailHtml(node);
+			inspector.path.textContent = node.path.join(' / ');
+			inspector.children.innerHTML = `
+				${children.length ? '<p class="neighbor-kicker">Next branches</p>' : ''}
+				${
+					children.length
+						? children.map((child) => `<button type="button" data-node="${child.id}">${child.title}<span>Level ${child.level}</span></button>`).join('')
+						: '<p>No further child branches yet.</p>'
+				}
+				${connections.length ? '<p class="neighbor-kicker">Neighbor edges</p>' : ''}
+				${connections
+					.map((edge) => {
+						const otherId = edge.source === id ? edge.target : edge.source;
+						const other = nodesById.get(otherId);
+						return `<button type="button" data-edge="${edge.id}">${other?.title || edge.title}<span>Edge</span></button>`;
+					})
+					.join('')}
+			`;
+			if (editUnlocked) fillEditorForNode(node);
+			renderGraph();
+		}
+
+		function selectEdge(id) {
+			const edge = edgesById.get(id);
+			if (!edge) return;
+			selectedEdgeId = id;
+			selectedOrbitLevel = null;
+			const source = nodesById.get(edge.source);
+			const target = nodesById.get(edge.target);
+			moveCameraForEdge(edge, true);
+			inspector.kicker.textContent = 'Selected Relation';
+			inspector.title.textContent = edge.title || `${source.title} -> ${target.title}`;
+			inspector.level.textContent = `${source.level}.${target.level}`;
+			inspector.group.textContent = target.groupLabel;
+			inspector.body.innerHTML = edge.html;
+			inspector.path.textContent = `${source.title} / ${target.title}`;
+			inspector.children.innerHTML = `
+				<p class="neighbor-kicker">Connected nodes</p>
+				<button type="button" data-node="${source.id}">${source.title}<span>Source</span></button>
+				<button type="button" data-node="${target.id}">${target.title}<span>Target</span></button>
+			`;
+			if (editUnlocked) fillEditorForEdge(edge);
+			renderGraph();
+		}
+
+		function selectOrbit(level) {
+			selectedOrbitLevel = Number(level);
+			selectedEdgeId = null;
+			const nodes = orbitNodes(selectedOrbitLevel);
+			if (!nodes.length) return;
+			moveCameraForOrbit(selectedOrbitLevel);
+			inspector.kicker.textContent = 'Selected Orbit';
+			inspector.title.textContent = orbitTitle(selectedOrbitLevel);
+			inspector.level.textContent = selectedOrbitLevel;
+			inspector.group.textContent = 'Abstraction';
+			inspector.body.innerHTML = orbitHtml(selectedOrbitLevel);
+			inspector.path.textContent = `Orbit ${selectedOrbitLevel} / ${nodes.length} concepts`;
+			inspector.children.innerHTML = `
+				<p class="neighbor-kicker">Orbit members</p>
+				${nodes.map((node) => `<button type="button" data-node="${node.id}">${node.title}<span>${node.groupLabel}</span></button>`).join('')}
+			`;
+			if (editUnlocked) {
+				editor.kind.textContent = 'Orbit';
+				editor.groupField.hidden = true;
+				editor.title.value = orbitTitle(selectedOrbitLevel);
+				editor.description.value = orbitSummary(selectedOrbitLevel);
+				editor.tags.value = `orbit, level-${selectedOrbitLevel}, abstraction`;
+				editor.color.value = orbitColor(selectedOrbitLevel);
+				editor.body.value = orbitSummary(selectedOrbitLevel);
+			}
+			renderGraph();
+		}
+
+		async function loadGraph() {
+			const response = await fetch('/api/graph.json');
+			if (!response.ok) return;
+			graph = await response.json();
+			rebuildIndexes();
+			if (!nodesById.has(selectedId)) selectedId = 'neo-koinonia';
+			renderGraph();
+			if (selectedOrbitLevel !== null && orbitNodes(selectedOrbitLevel).length) selectOrbit(selectedOrbitLevel);
+			else selectNode(selectedId, { expand: false, zoom: false });
+		}
+
+		async function saveSelected(event) {
+			event.preventDefault();
+			if (!editUnlocked) return;
+			if (selectedOrbitLevel !== null) {
+				saveStatus.textContent = 'Orbits are generated from OKF levels';
+				return;
+			}
+			const isEdge = Boolean(selectedEdgeId);
+			const payload = {
+				type: isEdge ? 'edge' : 'node',
+				id: isEdge ? selectedEdgeId : selectedId,
+				title: editor.title.value,
+				description: editor.description.value,
+				tags: editor.tags.value,
+				group: editor.group.value,
+				groupLabel: editor.group.value,
+				color: editor.color.value,
+				body: editor.body.value,
+			};
+			saveStatus.textContent = 'Saving...';
+			const response = await fetch('/api/graph.json', {
+				method: 'POST',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify(payload),
+			});
+			const result = await response.json();
+			if (!result.ok) {
+				saveStatus.textContent = result.error || 'Save failed';
+				return;
+			}
+			graph = result.graph;
+			rebuildIndexes();
+			saveStatus.textContent = 'Saved to OKF';
+			isEdge ? selectEdge(payload.id) : selectNode(payload.id, { expand: true, zoom: false });
+		}
+
+		async function createChildNode() {
+			if (!editUnlocked) return;
+			if (selectedOrbitLevel !== null) {
+				saveStatus.textContent = 'Select a node before creating a child';
+				return;
+			}
+			const parent = selectedEdgeId ? edgesById.get(selectedEdgeId).target : selectedId;
+			saveStatus.textContent = 'Creating...';
+			const response = await fetch('/api/graph.json', {
+				method: 'POST',
+				headers: { 'content-type': 'application/json' },
+				body: JSON.stringify({
+					type: 'create-node',
+					parent,
+					title: editor.newTitle.value || 'New Orbit',
+					body: editor.newBody.value || 'Describe this branch.',
+					group: editor.group.value || nodesById.get(parent)?.group || 'knowledge',
+					groupLabel: editor.group.value || nodesById.get(parent)?.groupLabel || 'Knowledge',
+					color: editor.color.value,
+				}),
+			});
+			const result = await response.json();
+			if (!result.ok) {
+				saveStatus.textContent = result.error || 'Create failed';
+				return;
+			}
+			graph = result.graph;
+			rebuildIndexes();
+			expanded.add(parent);
+			editor.newTitle.value = '';
+			editor.newBody.value = '';
+			saveStatus.textContent = 'New node saved';
+			selectNode(result.id, { expand: true, zoom: true });
+		}
+
+		function resize() {
+			const bounds = mount.getBoundingClientRect();
+			renderer.setSize(bounds.width, bounds.height);
+			composer.setSize(bounds.width, bounds.height);
+			camera.aspect = bounds.width / bounds.height;
+			camera.updateProjectionMatrix();
+		}
+
+		function animate(time) {
+			const t = time * 0.001;
+			const delta = lastFrameTime ? Math.min(0.08, t - lastFrameTime) : 1 / 60;
+			lastFrameTime = t;
+			const transitionT = Math.min(1, (t - focusStartedAt) / focusDuration);
+			focusProgress = Math.max(focusProgress, transitionT);
+			const focusEase = Easing.easeOutCubic(focusProgress);
+			const liveFocus = focusLocalPosition(t);
+			focusPivotTarget.copy(liveFocus);
+			cameraWobble.update(t * 0.32);
+
+			universeGroup.rotation.y = t * 0.006;
+			const orbitY = Math.sin(t * 0.08) * 0.05 + graphRotation.y;
+			const orbitX = graphRotation.x;
+			graphRotationEuler.set(orbitX, orbitY, 0);
+			focusPivot.lerp(focusPivotTarget, 0.035 + focusEase * 0.08);
+			[orbitGroup, edgeGroup, nodeGroup].forEach((group) => {
+				group.position.copy(focusPivot);
+				group.rotation.copy(graphRotationEuler);
+				group.position.sub(focusPivot.clone().applyEuler(graphRotationEuler));
+			});
+			const visibleFocus = liveFocus.clone().sub(focusPivot).applyEuler(graphRotationEuler).add(focusPivot);
+			cameraLookTarget.copy(visibleFocus);
+			cameraTarget = cameraLookTarget
+				.clone()
+				.add(cameraDirection.clone().multiplyScalar(focusDistance))
+				.add(cameraWobbleOffset);
+			if (selectedId === 'neo-koinonia' && !selectedEdgeId && selectedOrbitLevel === null) cameraTarget.y += 4.5;
+			camera.position.lerp(cameraTarget, 0.035 + focusEase * 0.045);
+			cameraLookCurrent.lerp(cameraLookTarget, 0.04 + focusEase * 0.075);
+			camera.lookAt(cameraLookCurrent);
+			starLayers.forEach((stars, index) => {
+				stars.rotation.y += stars.userData.speed;
+				stars.rotation.x += stars.userData.speed * 0.22;
+				stars.position.z = Math.sin(t * 0.015 + index) * (index + 1) * stars.userData.depth;
+			});
+			updatePositions(t, delta);
+			composer.render();
+			animationId = requestAnimationFrame(animate);
+		}
+
+		function pick(event) {
+			if (dragState.moved) return;
+			const rect = renderer.domElement.getBoundingClientRect();
+			pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+			pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+			raycaster.setFromCamera(pointer, camera);
+			const [hit] = raycaster.intersectObjects(interactive, false);
+			if (!hit) return;
+			if (hit.object.userData.type === 'node') selectNode(hit.object.userData.id, { expand: true, zoom: true });
+			if (hit.object.userData.type === 'edge') selectEdge(hit.object.userData.id);
+			if (hit.object.userData.type === 'orbit') selectOrbit(hit.object.userData.level);
+		}
+
+		function startDrag(event) {
+			dragState.active = true;
+			dragState.moved = false;
+			dragState.x = event.clientX;
+			dragState.y = event.clientY;
+			renderer.domElement.setPointerCapture(event.pointerId);
+		}
+
+		function moveDrag(event) {
+			if (!dragState.active) return;
+			const dx = event.clientX - dragState.x;
+			const dy = event.clientY - dragState.y;
+			if (Math.abs(dx) + Math.abs(dy) > 4) dragState.moved = true;
+			graphRotation.y += dx * 0.006;
+			graphRotation.x = THREE.MathUtils.euclideanModulo(graphRotation.x + dy * 0.004 + Math.PI, Math.PI * 2) - Math.PI;
+			dragState.x = event.clientX;
+			dragState.y = event.clientY;
+		}
+
+		function endDrag(event) {
+			if (!dragState.active) return;
+			dragState.active = false;
+			renderer.domElement.releasePointerCapture(event.pointerId);
+		}
+
+		function zoomWheel(event) {
+			if (!event.target.closest('.stage')) return;
+			event.preventDefault();
+			event.stopPropagation();
+			currentCameraDirection();
+			const multiplier = 1 + THREE.MathUtils.clamp(event.deltaY, -900, 900) * 0.0014;
+			setFocusDistance(focusDistance * multiplier);
+		}
+
+		function setSidebarCollapsed(collapsed) {
+			shell.classList.toggle('sidebar-collapsed', collapsed);
+			inspectorToggle.setAttribute('aria-expanded', String(!collapsed));
+			inspectorToggle.setAttribute('aria-label', collapsed ? 'Expand sidebar' : 'Collapse sidebar');
+			inspectorToggle.title = collapsed ? 'Expand sidebar' : 'Collapse sidebar';
+			inspectorToggle.querySelector('span').textContent = collapsed ? '‹' : '›';
+			inspectorContent.setAttribute('aria-hidden', String(collapsed));
+			localStorage.setItem('neo-inspector', collapsed ? 'collapsed' : 'expanded');
+			requestAnimationFrame(resize);
+			window.setTimeout(resize, 260);
+		}
+
+		document.addEventListener('click', (event) => {
+			const childButton = event.target.closest('[data-node]');
+			if (childButton) selectNode(childButton.dataset.node, { expand: true, zoom: true });
+			const edgeButton = event.target.closest('[data-edge]');
+			if (edgeButton) selectEdge(edgeButton.dataset.edge);
+		});
+
+		inspectorToggle.addEventListener('click', () => {
+			setSidebarCollapsed(!shell.classList.contains('sidebar-collapsed'));
+		});
+
+		loginPanel.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const key = new FormData(loginPanel).get('key');
+			if (key !== 'neo') {
+				saveStatus.textContent = 'Editor key is neo';
+				return;
+			}
+			editUnlocked = true;
+			localStorage.setItem('neo-editor', 'unlocked');
+			loginPanel.hidden = true;
+			editorPanel.hidden = false;
+			saveStatus.textContent = 'Editor unlocked';
+			if (selectedOrbitLevel !== null) {
+				editor.kind.textContent = 'Orbit';
+				editor.groupField.hidden = true;
+				editor.title.value = orbitTitle(selectedOrbitLevel);
+				editor.description.value = orbitSummary(selectedOrbitLevel);
+				editor.tags.value = `orbit, level-${selectedOrbitLevel}, abstraction`;
+				editor.color.value = orbitColor(selectedOrbitLevel);
+				editor.body.value = orbitSummary(selectedOrbitLevel);
+			} else {
+				selectedEdgeId ? fillEditorForEdge(edgesById.get(selectedEdgeId)) : fillEditorForNode(nodesById.get(selectedId));
+			}
+		});
+
+		editorPanel.hidden = !editUnlocked;
+		editorPanel.addEventListener('submit', saveSelected);
+		document.querySelector('#create-node').addEventListener('click', createChildNode);
+		renderer.domElement.addEventListener('pointerdown', startDrag);
+		renderer.domElement.addEventListener('pointermove', moveDrag);
+		renderer.domElement.addEventListener('pointerup', endDrag);
+		renderer.domElement.addEventListener('pointercancel', endDrag);
+		document.querySelector('.stage').addEventListener('wheel', zoomWheel, { passive: false });
+		renderer.domElement.addEventListener('click', pick);
+		window.addEventListener('resize', resize);
+
+		rebuildIndexes();
+		addStarfield();
+		setSidebarCollapsed(localStorage.getItem('neo-inspector') === 'collapsed');
+		resize();
+		selectNode('neo-koinonia', { expand: false, zoom: false });
+		loadGraph();
+		animate(0);
+
+		document.addEventListener('astro:before-swap', () => cancelAnimationFrame(animationId));
+	</script>
+</Layout>
+
+<style>
+	.app-shell {
+		--sidebar-rail: 52px;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) clamp(340px, 32vw, 460px);
+		min-height: 100vh;
+		background: #030306;
+		font-family:
+			Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+			sans-serif;
+		transition: grid-template-columns 220ms ease;
+	}
+
+	.app-shell.sidebar-collapsed {
+		grid-template-columns: minmax(0, 1fr) var(--sidebar-rail);
+	}
+
+	.stage {
+		position: relative;
+		min-height: 100vh;
+		overflow: hidden;
+		border-right: 1px solid rgba(242, 239, 230, 0.1);
+	}
+
+	.stage::after {
+		position: absolute;
+		inset: 0;
+		content: "";
+		background:
+			linear-gradient(rgba(98, 232, 255, 0.018) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(98, 232, 255, 0.012) 1px, transparent 1px);
+		background-size: 56px 56px;
+		opacity: 0.18;
+		pointer-events: none;
+	}
+
+	.stage::before {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		content: "";
+		background:
+			linear-gradient(90deg, rgba(3, 3, 6, 0.34), transparent 24%, transparent 78%, rgba(3, 3, 6, 0.2)),
+			linear-gradient(180deg, rgba(3, 3, 6, 0.26), transparent 20%, transparent 78%, rgba(3, 3, 6, 0.42));
+		pointer-events: none;
+	}
+
+	.graph-canvas,
+	.label-layer {
+		position: absolute;
+		inset: 0;
+	}
+
+	.graph-canvas canvas {
+		cursor: grab;
+	}
+
+	.graph-canvas canvas:active {
+		cursor: grabbing;
+	}
+
+	.label-layer {
+		z-index: 2;
+		pointer-events: none;
+	}
+
+	:global(.children-list button) {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		width: 100%;
+		min-height: 46px;
+		border: 1px solid rgba(242, 239, 230, 0.14);
+		border-radius: 14px;
+		background: rgba(255, 255, 255, 0.035);
+		color: #f2efe6;
+		text-align: left;
+		padding: 10px 12px;
+		cursor: pointer;
+	}
+
+	:global(.children-list button span) {
+		flex: 0 0 auto;
+		color: rgba(242, 239, 230, 0.48);
+		font-size: 0.74rem;
+	}
+
+	.topbar,
+	.statusbar {
+		position: absolute;
+		left: clamp(18px, 4vw, 56px);
+		right: clamp(18px, 4vw, 56px);
+		z-index: 4;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		pointer-events: none;
+	}
+
+	.topbar {
+		top: 28px;
+		padding-bottom: 14px;
+		border-bottom: 1px solid rgba(242, 239, 230, 0.08);
+	}
+
+	.statusbar {
+		bottom: 26px;
+		color: rgba(242, 239, 230, 0.66);
+		font-size: 0.86rem;
+	}
+
+	.eyebrow,
+	.inspector-header p {
+		margin: 0 0 8px;
+		color: rgba(242, 239, 230, 0.48);
+		font-size: 0.74rem;
+		font-weight: 650;
+		letter-spacing: 0;
+		text-transform: uppercase;
+	}
+
+	h1,
+	h2,
+	h3,
+	p {
+		margin-top: 0;
+	}
+
+	h1 {
+		margin-bottom: 0;
+		font-size: clamp(1.25rem, 2.3vw, 2rem);
+		line-height: 1.05;
+		max-width: 20ch;
+		letter-spacing: 0;
+		text-shadow: 0 0 32px rgba(125, 211, 252, 0.18);
+	}
+
+	.login-panel button,
+	.editor-panel button,
+	.inspector-toggle {
+		display: grid;
+		min-width: 42px;
+		min-height: 42px;
+		place-items: center;
+		border: 1px solid rgba(242, 239, 230, 0.16);
+		border-radius: 999px;
+		background: rgba(18, 18, 25, 0.68);
+		color: #f2efe6;
+		cursor: pointer;
+	}
+
+	.login-panel {
+		position: absolute;
+		top: 84px;
+		right: clamp(18px, 4vw, 56px);
+		z-index: 5;
+		display: flex;
+		gap: 8px;
+		padding: 10px;
+		border: 1px solid rgba(242, 239, 230, 0.14);
+		border-radius: 18px;
+		background: rgba(10, 10, 18, 0.86);
+		backdrop-filter: blur(16px);
+	}
+
+	.login-panel[hidden],
+	.editor-panel[hidden] {
+		display: none;
+	}
+
+	.cosmic-verse {
+		position: absolute;
+		left: clamp(18px, 4vw, 56px);
+		bottom: 72px;
+		z-index: 3;
+		max-width: min(420px, 58vw);
+		margin: 0;
+		color: rgba(242, 239, 230, 0.42);
+		font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+		font-size: clamp(1rem, 1.5vw, 1.38rem);
+		font-style: italic;
+		line-height: 1.28;
+		text-shadow: 0 0 18px rgba(125, 211, 252, 0.2);
+		pointer-events: none;
+	}
+
+	.cosmic-verse span {
+		display: block;
+	}
+
+	label {
+		display: grid;
+		gap: 6px;
+	}
+
+	label span {
+		color: rgba(242, 239, 230, 0.58);
+		font-size: 0.76rem;
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		border: 1px solid rgba(242, 239, 230, 0.14);
+		border-radius: 10px;
+		background: rgba(255, 255, 255, 0.045);
+		color: #f2efe6;
+		padding: 10px;
+		outline: none;
+	}
+
+	input[type='color'] {
+		min-height: 42px;
+		padding: 4px;
+	}
+
+	.inspector {
+		position: relative;
+		min-width: 0;
+		max-height: 100vh;
+		border-left: 1px solid rgba(242, 239, 230, 0.1);
+		background:
+			linear-gradient(180deg, rgba(18, 18, 26, 0.92), rgba(9, 9, 14, 0.96)),
+			rgba(8, 10, 16, 0.9);
+		backdrop-filter: blur(18px);
+		overflow: hidden;
+	}
+
+	.inspector-toggle {
+		position: absolute;
+		top: 22px;
+		right: 14px;
+		z-index: 6;
+		min-width: 34px;
+		min-height: 34px;
+		width: 34px;
+		height: 34px;
+		padding: 0;
+		font-size: 1.35rem;
+		line-height: 1;
+	}
+
+	.inspector-content {
+		display: flex;
+		flex-direction: column;
+		gap: 22px;
+		min-width: 340px;
+		max-height: 100vh;
+		padding: 28px;
+		overflow: auto;
+		opacity: 1;
+		transform: translateX(0);
+		transition:
+			opacity 160ms ease,
+			transform 220ms ease;
+	}
+
+	.inspector-header {
+		padding-right: 48px;
+	}
+
+	.sidebar-collapsed .inspector-content {
+		opacity: 0;
+		pointer-events: none;
+		transform: translateX(18px);
+	}
+
+	.sidebar-collapsed .inspector-toggle {
+		right: 9px;
+	}
+
+	h2 {
+		margin-bottom: 0;
+		font-size: clamp(1.35rem, 2vw, 1.8rem);
+		line-height: 1;
+	}
+
+	.meta-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	.meta-grid div,
+	.editor-panel {
+		border: 1px solid rgba(242, 239, 230, 0.12);
+		border-radius: 14px;
+		background: rgba(255, 255, 255, 0.026);
+		padding: 12px;
+	}
+
+	.meta-grid span,
+	.children-list span {
+		display: block;
+		color: rgba(242, 239, 230, 0.56);
+		font-size: 0.76rem;
+	}
+
+	.meta-grid strong {
+		display: block;
+		margin-top: 5px;
+		color: #f2efe6;
+	}
+
+	.prose {
+		color: rgba(242, 239, 230, 0.78);
+		font-size: 0.94rem;
+		line-height: 1.65;
+	}
+
+	.prose p {
+		margin-bottom: 1rem;
+	}
+
+	.prose .node-description {
+		color: rgba(242, 239, 230, 0.9);
+		font-size: 0.98rem;
+		font-weight: 650;
+		line-height: 1.55;
+	}
+
+	.tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+		margin: -2px 0 16px;
+	}
+
+	.tag-list span {
+		border: 1px solid rgba(125, 211, 252, 0.26);
+		border-radius: 999px;
+		background: rgba(125, 211, 252, 0.08);
+		color: rgba(219, 244, 255, 0.88);
+		font-size: 0.72rem;
+		font-weight: 700;
+		line-height: 1;
+		padding: 6px 9px;
+	}
+
+	.children-panel h3,
+	.editor-panel h3 {
+		margin-bottom: 12px;
+		font-size: 0.96rem;
+	}
+
+	.children-list,
+	.editor-panel,
+	.create-node {
+		display: grid;
+		gap: 10px;
+	}
+
+	.children-list p {
+		color: rgba(242, 239, 230, 0.56);
+	}
+
+	:global(.children-list .neighbor-kicker) {
+		margin: 12px 0 2px;
+		color: rgba(125, 211, 252, 0.68);
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+		font-size: 0.7rem;
+		font-weight: 800;
+		text-transform: uppercase;
+	}
+
+	.editor-title {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.editor-title h3 {
+		margin: 0;
+	}
+
+	.editor-title span {
+		color: #7dd3fc;
+		font-size: 0.82rem;
+	}
+
+	.create-node {
+		margin-top: 8px;
+		padding-top: 14px;
+		border-top: 1px solid rgba(242, 239, 230, 0.12);
+	}
+
+	@media (max-width: 900px) {
+		.app-shell,
+		.app-shell.sidebar-collapsed {
+			grid-template-columns: 1fr;
+		}
+
+		.stage {
+			min-height: 60vh;
+		}
+
+		.inspector {
+			max-height: none;
+			border-left: 0;
+			border-top: 1px solid rgba(242, 239, 230, 0.12);
+		}
+
+		.inspector-content {
+			min-width: 0;
+			max-height: none;
+			padding: 64px 22px 22px;
+		}
+
+		.inspector-toggle {
+			top: 14px;
+			right: 18px;
+		}
+
+		.sidebar-collapsed .inspector {
+			max-height: 52px;
+		}
+
+		.topbar,
+		.statusbar {
+			left: 18px;
+			right: 18px;
+		}
+
+		.topbar {
+			flex-wrap: wrap;
+		}
+
+		.login-panel {
+			right: 18px;
+			left: 18px;
+		}
+
+		.cosmic-verse {
+			bottom: 76px;
+			max-width: calc(100vw - 36px);
+			font-size: 1.05rem;
+		}
+	}
+</style>
