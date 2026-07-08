@@ -16,6 +16,8 @@ relations:
     label: extends
   - target: software
     label: abstracts
+  - target: a2ui-agent-to-user-interface
+    label: complements
 ---
 # AI-to-AI Protocols
 
@@ -26,3 +28,5 @@ Most software value is structured data plus permissible actions. A bank, a marke
 AI-to-AI protocols become a layer above databases and services. Agents connect directly to the underlying data and capabilities. They negotiate, query, update, verify, and report back only what the human needs to know.
 
 This is why many data management tools may disappear. The future interface to data is not another table UI. It is an agent that understands what the data means and what may be done with it.
+
+A2AI and A2UI are complementary. A2AI describes how agents communicate with institutions, databases, services, and other agents. A2UI describes how agents communicate back to the human through generated interface. One removes unnecessary human-facing software between machines. The other removes unnecessary text between machine and human.

@@ -16,6 +16,8 @@ relations:
     label: dissolves
   - target: ai-to-ai-protocols
     label: requires
+  - target: a2ui-agent-to-user-interface
+    label: is accelerated by
 ---
 # Post-SaaS Economy
 
@@ -28,3 +30,5 @@ If a marketing SaaS is only a pleasant interface around a set of repeatable mark
 The question then becomes: what remains scarce?
 
 Not another dashboard. Not another workflow tool. Not another thin interface over someone else's database. The remaining value moves toward research, compute, storage, physical production, robotics, energy, and the machines that produce other machines.
+
+The post-SaaS economy is accelerated by A2UI. If agents can generate task-specific interfaces safely from structured blueprints, then many fixed SaaS products lose their reason to exist. The user does not need a permanent application for every workflow. The user needs data access, permissions, verification, and an interface generated at the moment of need.

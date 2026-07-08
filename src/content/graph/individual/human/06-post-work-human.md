@@ -14,6 +14,8 @@ relations:
     label: focuses on
   - target: work
     label: follows
+  - target: unified-editable-ui
+    label: works through
 ---
 # Post-Work Human
 
@@ -24,3 +26,5 @@ This does not mean the human becomes useless. It means the old identity between 
 AI is powerful at executing predetermined tasks. It can search, combine, generate, optimize, and operate within a frame. But the frame itself remains the fragile point. What should be researched? What should be trusted? What should be built? What should be forbidden? What is beautiful, meaningful, dignified, or dangerous?
 
 The post-work human is not idle. The post-work human becomes a source of questions, constraints, taste, and verification.
+
+This human also works through different interfaces. Less time is spent manually operating applications, and more time is spent shaping intention, checking outputs, and steering generated surfaces. Post-work does not mean post-action. It means action is mediated by agents, tools, and interfaces that can recompose themselves around the task.

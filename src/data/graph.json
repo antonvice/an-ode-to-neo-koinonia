@@ -452,7 +452,7 @@
       "color": "#f97316",
       "order": 1,
       "body": "# AI Entertainment Factories\n\nEntertainment becomes infinite when media is generated rather than distributed.\n\nAn AI entertainment factory does not merely recommend a movie, game, or song. It produces worlds. It reads preference, memory, mood, fantasy, fear, and desire, then generates a stream of personalized environments. The user does not browse a catalog. The catalog is synthesized around the user.\n\nThis may become one of the most seductive forms of post-work life. If machines can produce goods and agents can perform services, entertainment becomes less constrained by studios, genres, or production budgets. Anyone can ask for a world and receive it.\n\nThe danger is that perfect entertainment can become a private universe. Culture may split between shared reality and personalized dream.",
-      "html": "<p># AI Entertainment Factories</p>\n<p>Entertainment becomes infinite when media is generated rather than distributed.</p>\n<p>An AI entertainment factory does not merely recommend a movie, game, or song. It produces worlds. It reads preference, memory, mood, fantasy, fear, and desire, then generates a stream of personalized environments. The user does not browse a catalog. The catalog is synthesized around the user.</p>\n<p>This may become one of the most seductive forms of post-work life. If machines can produce goods and agents can perform services, entertainment becomes less constrained by studios, genres, or production budgets. Anyone can ask for a world and receive it.</p>\n<p>The danger is that perfect entertainment can become a private universe. Culture may split between shared reality and personalized dream.</p>",
+      "html": "<h2>AI Entertainment Factories</h2>\n<p>Entertainment becomes infinite when media is generated rather than distributed.</p>\n<p>An AI entertainment factory does not merely recommend a movie, game, or song. It produces worlds. It reads preference, memory, mood, fantasy, fear, and desire, then generates a stream of personalized environments. The user does not browse a catalog. The catalog is synthesized around the user.</p>\n<p>This may become one of the most seductive forms of post-work life. If machines can produce goods and agents can perform services, entertainment becomes less constrained by studios, genres, or production budgets. Anyone can ask for a world and receive it.</p>\n<p>The danger is that perfect entertainment can become a private universe. Culture may split between shared reality and personalized dream.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -502,6 +502,33 @@
         "Body"
       ],
       "angle": -1.7016960206944711
+    },
+    {
+      "id": "extended-mind",
+      "title": "Extended Mind",
+      "description": "The mind extended through notes, memory, voice, BCI, agents, and generated interface.",
+      "tags": [
+        "extended-mind",
+        "interface",
+        "memory",
+        "bci",
+        "a2ui"
+      ],
+      "parent": "hybrid-self",
+      "level": 3,
+      "group": "individual",
+      "groupLabel": "Hybrid Self",
+      "color": "#7dd3fc",
+      "order": 1,
+      "body": "# Extended Mind\n\nThe extended mind is moving from notes and memory into interface.\n\nVoice dictation already shows the beginning of this shift: the human does less manual manipulation and more intention transmission. The computer becomes a surface that listens before it becomes a surface that is clicked.\n\nBCI would deepen the pattern by moving from spoken language toward latent intention. It would make the boundary between thought and command thinner, though also more dangerous.\n\nA2UI completes the loop by returning not only words, but an interactive surface the mind can keep shaping. The mind extends outward, the agent acts, and the world returns as editable interface.",
+      "html": "<h2>Extended Mind</h2>\n<p>The extended mind is moving from notes and memory into interface.</p>\n<p>Voice dictation already shows the beginning of this shift: the human does less manual manipulation and more intention transmission. The computer becomes a surface that listens before it becomes a surface that is clicked.</p>\n<p>BCI would deepen the pattern by moving from spoken language toward latent intention. It would make the boundary between thought and command thinner, though also more dangerous.</p>\n<p>A2UI completes the loop by returning not only words, but an interactive surface the mind can keep shaping. The mind extends outward, the agent acts, and the world returns as editable interface.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "Individual",
+        "Hybrid Self",
+        "Extended Mind"
+      ],
+      "angle": -0.26179938779914946
     },
     {
       "id": "hardware",
@@ -837,7 +864,7 @@
         "Technology",
         "Software"
       ],
-      "angle": 0.6386318399342887
+      "angle": 0.6276472502364223
     },
     {
       "id": "biology",
@@ -900,7 +927,7 @@
         "Technology",
         "Networks"
       ],
-      "angle": 0.7100316729704205
+      "angle": 0.6880624935746876
     },
     {
       "id": "personality",
@@ -997,15 +1024,15 @@
       "groupLabel": "Interfaces",
       "color": "#5eead4",
       "order": 4,
-      "body": "",
-      "html": "",
+      "body": "# Interfaces\n\nThe chat interface was not the final interface to artificial intelligence. It was the first discovered handle.\n\nLanguage let ordinary people touch the phenomenon. Agents let the phenomenon touch tools. The next step is not longer chat, but tighter coupling between intention, state, tools, and generated interface.\n\nThe computer stops being a set of apps and becomes a loop: intention in, agent reasoning, tool action, state update, interface out.\n\nIn that loop, interface is no longer a fixed surface. It is a temporary shape produced around the task, the available data, the permission boundary, and the user's current intention.",
+      "html": "<h2>Interfaces</h2>\n<p>The chat interface was not the final interface to artificial intelligence. It was the first discovered handle.</p>\n<p>Language let ordinary people touch the phenomenon. Agents let the phenomenon touch tools. The next step is not longer chat, but tighter coupling between intention, state, tools, and generated interface.</p>\n<p>The computer stops being a set of apps and becomes a loop: intention in, agent reasoning, tool action, state update, interface out.</p>\n<p>In that loop, interface is no longer a fixed surface. It is a temporary shape produced around the task, the available data, the permission boundary, and the user&#039;s current intention.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Interfaces"
       ],
-      "angle": 0.7814315060065521
+      "angle": 0.7484777369129529
     },
     {
       "id": "medicine",
@@ -1045,8 +1072,8 @@
       "groupLabel": "Economy",
       "color": "#facc15",
       "order": 4,
-      "body": "# Post-SaaS Economy\n\nThe first visible effect of AI coding is not the end of software, but the overproduction of it.\n\nPeople who were not previously engineers can now build Software 1.0 systems: dashboards, CRMs, marketing tools, schedulers, data panels, automation portals. Many of these become startups. They look like SaaS companies because they have interfaces, subscriptions, and narrow business functions. But their substance is thinner than old software companies, because the thing they sell can increasingly be reproduced by the customer's own AI harness.\n\nIf a marketing SaaS is only a pleasant interface around a set of repeatable marketing operations, then its value declines as soon as a personal or company AI agent can perform those same operations directly. The customer does not need another product. The customer needs capability. Once capability can be summoned from a coding harness, SaaS becomes less like infrastructure and more like temporary packaging.\n\nThe question then becomes: what remains scarce?\n\nNot another dashboard. Not another workflow tool. Not another thin interface over someone else's database. The remaining value moves toward research, compute, storage, physical production, robotics, energy, and the machines that produce other machines.",
-      "html": "<p># Post-SaaS Economy</p>\n<p>The first visible effect of AI coding is not the end of software, but the overproduction of it.</p>\n<p>People who were not previously engineers can now build Software 1.0 systems: dashboards, CRMs, marketing tools, schedulers, data panels, automation portals. Many of these become startups. They look like SaaS companies because they have interfaces, subscriptions, and narrow business functions. But their substance is thinner than old software companies, because the thing they sell can increasingly be reproduced by the customer&#039;s own AI harness.</p>\n<p>If a marketing SaaS is only a pleasant interface around a set of repeatable marketing operations, then its value declines as soon as a personal or company AI agent can perform those same operations directly. The customer does not need another product. The customer needs capability. Once capability can be summoned from a coding harness, SaaS becomes less like infrastructure and more like temporary packaging.</p>\n<p>The question then becomes: what remains scarce?</p>\n<p>Not another dashboard. Not another workflow tool. Not another thin interface over someone else&#039;s database. The remaining value moves toward research, compute, storage, physical production, robotics, energy, and the machines that produce other machines.</p>",
+      "body": "# Post-SaaS Economy\n\nThe first visible effect of AI coding is not the end of software, but the overproduction of it.\n\nPeople who were not previously engineers can now build Software 1.0 systems: dashboards, CRMs, marketing tools, schedulers, data panels, automation portals. Many of these become startups. They look like SaaS companies because they have interfaces, subscriptions, and narrow business functions. But their substance is thinner than old software companies, because the thing they sell can increasingly be reproduced by the customer's own AI harness.\n\nIf a marketing SaaS is only a pleasant interface around a set of repeatable marketing operations, then its value declines as soon as a personal or company AI agent can perform those same operations directly. The customer does not need another product. The customer needs capability. Once capability can be summoned from a coding harness, SaaS becomes less like infrastructure and more like temporary packaging.\n\nThe question then becomes: what remains scarce?\n\nNot another dashboard. Not another workflow tool. Not another thin interface over someone else's database. The remaining value moves toward research, compute, storage, physical production, robotics, energy, and the machines that produce other machines.\n\nThe post-SaaS economy is accelerated by A2UI. If agents can generate task-specific interfaces safely from structured blueprints, then many fixed SaaS products lose their reason to exist. The user does not need a permanent application for every workflow. The user needs data access, permissions, verification, and an interface generated at the moment of need.",
+      "html": "<h2>Post-SaaS Economy</h2>\n<p>The first visible effect of AI coding is not the end of software, but the overproduction of it.</p>\n<p>People who were not previously engineers can now build Software 1.0 systems: dashboards, CRMs, marketing tools, schedulers, data panels, automation portals. Many of these become startups. They look like SaaS companies because they have interfaces, subscriptions, and narrow business functions. But their substance is thinner than old software companies, because the thing they sell can increasingly be reproduced by the customer&#039;s own AI harness.</p>\n<p>If a marketing SaaS is only a pleasant interface around a set of repeatable marketing operations, then its value declines as soon as a personal or company AI agent can perform those same operations directly. The customer does not need another product. The customer needs capability. Once capability can be summoned from a coding harness, SaaS becomes less like infrastructure and more like temporary packaging.</p>\n<p>The question then becomes: what remains scarce?</p>\n<p>Not another dashboard. Not another workflow tool. Not another thin interface over someone else&#039;s database. The remaining value moves toward research, compute, storage, physical production, robotics, energy, and the machines that produce other machines.</p>\n<p>The post-SaaS economy is accelerated by A2UI. If agents can generate task-specific interfaces safely from structured blueprints, then many fixed SaaS products lose their reason to exist. The user does not need a permanent application for every workflow. The user needs data access, permissions, verification, and an interface generated at the moment of need.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1094,14 +1121,14 @@
       "color": "#5eead4",
       "order": 5,
       "body": "# AI Coding Harnesses\n\nAn AI coding harness is not merely an autocomplete tool. It is a workbench where intent becomes software.\n\nThe user describes a system, corrects it, gives it tools, and lets the harness produce interfaces, databases, automations, tests, and deployments. This gives non-engineers the power to build Software 1.0 systems and gives engineers a way to operate above syntax.\n\nThe danger is that this power makes many products look more valuable than they are. A polished interface can now be produced before there is a deep company behind it. The harness creates the appearance of software abundance, but it also strips ordinary software of scarcity.\n\nThe engineer does not disappear. The engineer moves toward architecture, verification, systems that touch matter, and the design of constraints that agents cannot safely invent for themselves.",
-      "html": "<p># AI Coding Harnesses</p>\n<p>An AI coding harness is not merely an autocomplete tool. It is a workbench where intent becomes software.</p>\n<p>The user describes a system, corrects it, gives it tools, and lets the harness produce interfaces, databases, automations, tests, and deployments. This gives non-engineers the power to build Software 1.0 systems and gives engineers a way to operate above syntax.</p>\n<p>The danger is that this power makes many products look more valuable than they are. A polished interface can now be produced before there is a deep company behind it. The harness creates the appearance of software abundance, but it also strips ordinary software of scarcity.</p>\n<p>The engineer does not disappear. The engineer moves toward architecture, verification, systems that touch matter, and the design of constraints that agents cannot safely invent for themselves.</p>",
+      "html": "<h2>AI Coding Harnesses</h2>\n<p>An AI coding harness is not merely an autocomplete tool. It is a workbench where intent becomes software.</p>\n<p>The user describes a system, corrects it, gives it tools, and lets the harness produce interfaces, databases, automations, tests, and deployments. This gives non-engineers the power to build Software 1.0 systems and gives engineers a way to operate above syntax.</p>\n<p>The danger is that this power makes many products look more valuable than they are. A polished interface can now be produced before there is a deep company behind it. The harness creates the appearance of software abundance, but it also strips ordinary software of scarcity.</p>\n<p>The engineer does not disappear. The engineer moves toward architecture, verification, systems that touch matter, and the design of constraints that agents cannot safely invent for themselves.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "AI Coding Harnesses"
       ],
-      "angle": 0.8528313390426838
+      "angle": 0.8088929802512181
     },
     {
       "id": "computer-science",
@@ -1141,7 +1168,7 @@
       "color": "#facc15",
       "order": 5,
       "body": "# Goods, Services, and Research\n\nFrom first principles, economic life can be divided into three categories: goods, services, and research.\n\nGoods are physical outputs: food, housing materials, tools, furniture, computers, machines. Services are performed transformations: booking, cleaning, repairing, accounting, transporting, organizing, producing, maintaining. Research is the expansion of what can be known and therefore what can later be automated, produced, or verified.\n\nAI compresses services first. Any service that can be described, checked, and executed through software becomes a candidate for personal automation. Booking tickets, paying taxes, managing campaigns, filling forms, reconciling accounts, and planning logistics become tasks for one's own agent rather than external SaaS companies.\n\nPhysical services fall later, but not outside the same logic. Once robots become cheap and capable enough, physical service also becomes agentic labor. The agent does not merely plan the service. It sends a body to perform it.\n\nIn this world, the durable frontier is research: discovering what should be done, what is true, what is safe, what is valuable, and whether AI-generated outputs can be trusted.",
-      "html": "<p># Goods, Services, and Research</p>\n<p>From first principles, economic life can be divided into three categories: goods, services, and research.</p>\n<p>Goods are physical outputs: food, housing materials, tools, furniture, computers, machines. Services are performed transformations: booking, cleaning, repairing, accounting, transporting, organizing, producing, maintaining. Research is the expansion of what can be known and therefore what can later be automated, produced, or verified.</p>\n<p>AI compresses services first. Any service that can be described, checked, and executed through software becomes a candidate for personal automation. Booking tickets, paying taxes, managing campaigns, filling forms, reconciling accounts, and planning logistics become tasks for one&#039;s own agent rather than external SaaS companies.</p>\n<p>Physical services fall later, but not outside the same logic. Once robots become cheap and capable enough, physical service also becomes agentic labor. The agent does not merely plan the service. It sends a body to perform it.</p>\n<p>In this world, the durable frontier is research: discovering what should be done, what is true, what is safe, what is valuable, and whether AI-generated outputs can be trusted.</p>",
+      "html": "<h2>Goods, Services, and Research</h2>\n<p>From first principles, economic life can be divided into three categories: goods, services, and research.</p>\n<p>Goods are physical outputs: food, housing materials, tools, furniture, computers, machines. Services are performed transformations: booking, cleaning, repairing, accounting, transporting, organizing, producing, maintaining. Research is the expansion of what can be known and therefore what can later be automated, produced, or verified.</p>\n<p>AI compresses services first. Any service that can be described, checked, and executed through software becomes a candidate for personal automation. Booking tickets, paying taxes, managing campaigns, filling forms, reconciling accounts, and planning logistics become tasks for one&#039;s own agent rather than external SaaS companies.</p>\n<p>Physical services fall later, but not outside the same logic. Once robots become cheap and capable enough, physical service also becomes agentic labor. The agent does not merely plan the service. It sends a body to perform it.</p>\n<p>In this world, the durable frontier is research: discovering what should be done, what is true, what is safe, what is valuable, and whether AI-generated outputs can be trusted.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1188,15 +1215,15 @@
       "groupLabel": "Technology",
       "color": "#5eead4",
       "order": 6,
-      "body": "# AI-to-AI Protocols\n\nThe web was built for human navigation. The next layer is built for agent coordination.\n\nMost software value is structured data plus permissible actions. A bank, a marketing platform, a tax portal, or a travel site exposes data and operations through interfaces designed for human attention. But an AI agent does not need menus, dashboards, and visual workflows. It needs authenticated access, semantic descriptions, permissions, constraints, and reliable execution.\n\nAI-to-AI protocols become a layer above databases and services. Agents connect directly to the underlying data and capabilities. They negotiate, query, update, verify, and report back only what the human needs to know.\n\nThis is why many data management tools may disappear. The future interface to data is not another table UI. It is an agent that understands what the data means and what may be done with it.",
-      "html": "<p># AI-to-AI Protocols</p>\n<p>The web was built for human navigation. The next layer is built for agent coordination.</p>\n<p>Most software value is structured data plus permissible actions. A bank, a marketing platform, a tax portal, or a travel site exposes data and operations through interfaces designed for human attention. But an AI agent does not need menus, dashboards, and visual workflows. It needs authenticated access, semantic descriptions, permissions, constraints, and reliable execution.</p>\n<p>AI-to-AI protocols become a layer above databases and services. Agents connect directly to the underlying data and capabilities. They negotiate, query, update, verify, and report back only what the human needs to know.</p>\n<p>This is why many data management tools may disappear. The future interface to data is not another table UI. It is an agent that understands what the data means and what may be done with it.</p>",
+      "body": "# AI-to-AI Protocols\n\nThe web was built for human navigation. The next layer is built for agent coordination.\n\nMost software value is structured data plus permissible actions. A bank, a marketing platform, a tax portal, or a travel site exposes data and operations through interfaces designed for human attention. But an AI agent does not need menus, dashboards, and visual workflows. It needs authenticated access, semantic descriptions, permissions, constraints, and reliable execution.\n\nAI-to-AI protocols become a layer above databases and services. Agents connect directly to the underlying data and capabilities. They negotiate, query, update, verify, and report back only what the human needs to know.\n\nThis is why many data management tools may disappear. The future interface to data is not another table UI. It is an agent that understands what the data means and what may be done with it.\n\nA2AI and A2UI are complementary. A2AI describes how agents communicate with institutions, databases, services, and other agents. A2UI describes how agents communicate back to the human through generated interface. One removes unnecessary human-facing software between machines. The other removes unnecessary text between machine and human.",
+      "html": "<h2>AI-to-AI Protocols</h2>\n<p>The web was built for human navigation. The next layer is built for agent coordination.</p>\n<p>Most software value is structured data plus permissible actions. A bank, a marketing platform, a tax portal, or a travel site exposes data and operations through interfaces designed for human attention. But an AI agent does not need menus, dashboards, and visual workflows. It needs authenticated access, semantic descriptions, permissions, constraints, and reliable execution.</p>\n<p>AI-to-AI protocols become a layer above databases and services. Agents connect directly to the underlying data and capabilities. They negotiate, query, update, verify, and report back only what the human needs to know.</p>\n<p>This is why many data management tools may disappear. The future interface to data is not another table UI. It is an agent that understands what the data means and what may be done with it.</p>\n<p>A2AI and A2UI are complementary. A2AI describes how agents communicate with institutions, databases, services, and other agents. A2UI describes how agents communicate back to the human through generated interface. One removes unnecessary human-facing software between machines. The other removes unnecessary text between machine and human.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "AI-to-AI Protocols"
       ],
-      "angle": 0.9242311720788154
+      "angle": 0.8693082235894833
     },
     {
       "id": "means-of-production",
@@ -1215,7 +1242,7 @@
       "color": "#facc15",
       "order": 6,
       "body": "# Means of Production\n\nThe core assets of the future are not apps. They are means of production.\n\nA means of production is any machine or system that can produce useful output: compute clusters, storage systems, robot fleets, lab-food machines, 3D printers, factories for furniture and goods, machines that produce parts for other machines, and computers that orchestrate all of them.\n\nAs software becomes easier to generate, the scarce layer shifts downward into matter and energy. The question is no longer who can build the interface. The question is who owns the machine, who has access to compute, who controls the production process, and who can verify the output.\n\nThis creates a new access economy. Those who cannot afford the machines rent them, borrow them, subscribe to them, or participate in shared ownership networks. The economy becomes less about selling software and more about lending autonomy.",
-      "html": "<p># Means of Production</p>\n<p>The core assets of the future are not apps. They are means of production.</p>\n<p>A means of production is any machine or system that can produce useful output: compute clusters, storage systems, robot fleets, lab-food machines, 3D printers, factories for furniture and goods, machines that produce parts for other machines, and computers that orchestrate all of them.</p>\n<p>As software becomes easier to generate, the scarce layer shifts downward into matter and energy. The question is no longer who can build the interface. The question is who owns the machine, who has access to compute, who controls the production process, and who can verify the output.</p>\n<p>This creates a new access economy. Those who cannot afford the machines rent them, borrow them, subscribe to them, or participate in shared ownership networks. The economy becomes less about selling software and more about lending autonomy.</p>",
+      "html": "<h2>Means of Production</h2>\n<p>The core assets of the future are not apps. They are means of production.</p>\n<p>A means of production is any machine or system that can produce useful output: compute clusters, storage systems, robot fleets, lab-food machines, 3D printers, factories for furniture and goods, machines that produce parts for other machines, and computers that orchestrate all of them.</p>\n<p>As software becomes easier to generate, the scarce layer shifts downward into matter and energy. The question is no longer who can build the interface. The question is who owns the machine, who has access to compute, who controls the production process, and who can verify the output.</p>\n<p>This creates a new access economy. Those who cannot afford the machines rent them, borrow them, subscribe to them, or participate in shared ownership networks. The economy becomes less about selling software and more about lending autonomy.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1241,8 +1268,8 @@
       "groupLabel": "Human",
       "color": "#7dd3fc",
       "order": 6,
-      "body": "# Post-Work Human\n\nIf AI performs cognitive services and robots perform physical services, the human is no longer primarily an economic worker.\n\nThis does not mean the human becomes useless. It means the old identity between labor and worth breaks. The human role shifts toward research, taste, judgment, verification, philosophy, art, governance, and deciding what kinds of futures are desirable.\n\nAI is powerful at executing predetermined tasks. It can search, combine, generate, optimize, and operate within a frame. But the frame itself remains the fragile point. What should be researched? What should be trusted? What should be built? What should be forbidden? What is beautiful, meaningful, dignified, or dangerous?\n\nThe post-work human is not idle. The post-work human becomes a source of questions, constraints, taste, and verification.",
-      "html": "<p># Post-Work Human</p>\n<p>If AI performs cognitive services and robots perform physical services, the human is no longer primarily an economic worker.</p>\n<p>This does not mean the human becomes useless. It means the old identity between labor and worth breaks. The human role shifts toward research, taste, judgment, verification, philosophy, art, governance, and deciding what kinds of futures are desirable.</p>\n<p>AI is powerful at executing predetermined tasks. It can search, combine, generate, optimize, and operate within a frame. But the frame itself remains the fragile point. What should be researched? What should be trusted? What should be built? What should be forbidden? What is beautiful, meaningful, dignified, or dangerous?</p>\n<p>The post-work human is not idle. The post-work human becomes a source of questions, constraints, taste, and verification.</p>",
+      "body": "# Post-Work Human\n\nIf AI performs cognitive services and robots perform physical services, the human is no longer primarily an economic worker.\n\nThis does not mean the human becomes useless. It means the old identity between labor and worth breaks. The human role shifts toward research, taste, judgment, verification, philosophy, art, governance, and deciding what kinds of futures are desirable.\n\nAI is powerful at executing predetermined tasks. It can search, combine, generate, optimize, and operate within a frame. But the frame itself remains the fragile point. What should be researched? What should be trusted? What should be built? What should be forbidden? What is beautiful, meaningful, dignified, or dangerous?\n\nThe post-work human is not idle. The post-work human becomes a source of questions, constraints, taste, and verification.\n\nThis human also works through different interfaces. Less time is spent manually operating applications, and more time is spent shaping intention, checking outputs, and steering generated surfaces. Post-work does not mean post-action. It means action is mediated by agents, tools, and interfaces that can recompose themselves around the task.",
+      "html": "<h2>Post-Work Human</h2>\n<p>If AI performs cognitive services and robots perform physical services, the human is no longer primarily an economic worker.</p>\n<p>This does not mean the human becomes useless. It means the old identity between labor and worth breaks. The human role shifts toward research, taste, judgment, verification, philosophy, art, governance, and deciding what kinds of futures are desirable.</p>\n<p>AI is powerful at executing predetermined tasks. It can search, combine, generate, optimize, and operate within a frame. But the frame itself remains the fragile point. What should be researched? What should be trusted? What should be built? What should be forbidden? What is beautiful, meaningful, dignified, or dangerous?</p>\n<p>The post-work human is not idle. The post-work human becomes a source of questions, constraints, taste, and verification.</p>\n<p>This human also works through different interfaces. Less time is spent manually operating applications, and more time is spent shaping intention, checking outputs, and steering generated surfaces. Post-work does not mean post-action. It means action is mediated by agents, tools, and interfaces that can recompose themselves around the task.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Individual",
@@ -1290,14 +1317,14 @@
       "color": "#5eead4",
       "order": 7,
       "body": "# Local AI Machines\n\nThe future home may contain not only appliances, but a private computational center.\n\nThis machine hosts models, stores memory, coordinates robots, manages permissions, and controls productive devices. It is not only a computer for screens. It is a domestic command layer for autonomy.\n\nCloud models will remain powerful, but total dependence on remote intelligence makes the individual fragile. A local AI machine lets a person keep memory, preferences, and everyday control close to the body and home. It becomes the household's nervous system.\n\nThe question is whether such machines become common property, luxury equipment, or infrastructure that every person is expected to possess.",
-      "html": "<p># Local AI Machines</p>\n<p>The future home may contain not only appliances, but a private computational center.</p>\n<p>This machine hosts models, stores memory, coordinates robots, manages permissions, and controls productive devices. It is not only a computer for screens. It is a domestic command layer for autonomy.</p>\n<p>Cloud models will remain powerful, but total dependence on remote intelligence makes the individual fragile. A local AI machine lets a person keep memory, preferences, and everyday control close to the body and home. It becomes the household&#039;s nervous system.</p>\n<p>The question is whether such machines become common property, luxury equipment, or infrastructure that every person is expected to possess.</p>",
+      "html": "<h2>Local AI Machines</h2>\n<p>The future home may contain not only appliances, but a private computational center.</p>\n<p>This machine hosts models, stores memory, coordinates robots, manages permissions, and controls productive devices. It is not only a computer for screens. It is a domestic command layer for autonomy.</p>\n<p>Cloud models will remain powerful, but total dependence on remote intelligence makes the individual fragile. A local AI machine lets a person keep memory, preferences, and everyday control close to the body and home. It becomes the household&#039;s nervous system.</p>\n<p>The question is whether such machines become common property, luxury equipment, or infrastructure that every person is expected to possess.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Local AI Machines"
       ],
-      "angle": 0.9956310051149471
+      "angle": 0.9297234669277487
     },
     {
       "id": "research-and-verification",
@@ -1316,7 +1343,7 @@
       "color": "#f0abfc",
       "order": 7,
       "body": "# Research and Verification\n\nThe future human economy may narrow around two activities: research and verification.\n\nResearch expands the boundary of the possible. Verification protects society from hallucination, fraud, error, and premature certainty. AI can generate enormous volumes of claims, designs, plans, simulations, media, and code. But generation is not truth. A civilization of infinite output needs a civilization-scale discipline of checking.\n\nThis makes verification a central social function. Humans may spend less time producing routine artifacts and more time asking whether artifacts are real, useful, safe, original, aligned, and worth integrating into the world.\n\nResearch asks: what else can be true?\n\nVerification asks: is this true enough to act on?",
-      "html": "<p># Research and Verification</p>\n<p>The future human economy may narrow around two activities: research and verification.</p>\n<p>Research expands the boundary of the possible. Verification protects society from hallucination, fraud, error, and premature certainty. AI can generate enormous volumes of claims, designs, plans, simulations, media, and code. But generation is not truth. A civilization of infinite output needs a civilization-scale discipline of checking.</p>\n<p>This makes verification a central social function. Humans may spend less time producing routine artifacts and more time asking whether artifacts are real, useful, safe, original, aligned, and worth integrating into the world.</p>\n<p>Research asks: what else can be true?</p>\n<p>Verification asks: is this true enough to act on?</p>",
+      "html": "<h2>Research and Verification</h2>\n<p>The future human economy may narrow around two activities: research and verification.</p>\n<p>Research expands the boundary of the possible. Verification protects society from hallucination, fraud, error, and premature certainty. AI can generate enormous volumes of claims, designs, plans, simulations, media, and code. But generation is not truth. A civilization of infinite output needs a civilization-scale discipline of checking.</p>\n<p>This makes verification a central social function. Humans may spend less time producing routine artifacts and more time asking whether artifacts are real, useful, safe, original, aligned, and worth integrating into the world.</p>\n<p>Research asks: what else can be true?</p>\n<p>Verification asks: is this true enough to act on?</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Individual",
@@ -1342,7 +1369,7 @@
       "color": "#facc15",
       "order": 7,
       "body": "# Venture Value After AI\n\nAI coding makes many startups look larger than they are.\n\nA small team can now produce the appearance of a software company: polished UI, onboarding, dashboards, integrations, agents, internal tools. But if the product is merely a thin automation of a known business task, it may not deserve venture-scale value. It is not a deep company. It is a temporary wrapper around a capability that users may soon command directly.\n\nThe useful ventures are those that move the frontier: research, compute, robotics, hardware, production systems, scientific tools, verification systems, food automation, energy, and protocols that let agents coordinate with real-world systems.\n\nEverything else risks becoming investor theater: software built because AI made it easy to build, not because it creates durable value.",
-      "html": "<p># Venture Value After AI</p>\n<p>AI coding makes many startups look larger than they are.</p>\n<p>A small team can now produce the appearance of a software company: polished UI, onboarding, dashboards, integrations, agents, internal tools. But if the product is merely a thin automation of a known business task, it may not deserve venture-scale value. It is not a deep company. It is a temporary wrapper around a capability that users may soon command directly.</p>\n<p>The useful ventures are those that move the frontier: research, compute, robotics, hardware, production systems, scientific tools, verification systems, food automation, energy, and protocols that let agents coordinate with real-world systems.</p>\n<p>Everything else risks becoming investor theater: software built because AI made it easy to build, not because it creates durable value.</p>",
+      "html": "<h2>Venture Value After AI</h2>\n<p>AI coding makes many startups look larger than they are.</p>\n<p>A small team can now produce the appearance of a software company: polished UI, onboarding, dashboards, integrations, agents, internal tools. But if the product is merely a thin automation of a known business task, it may not deserve venture-scale value. It is not a deep company. It is a temporary wrapper around a capability that users may soon command directly.</p>\n<p>The useful ventures are those that move the frontier: research, compute, robotics, hardware, production systems, scientific tools, verification systems, food automation, energy, and protocols that let agents coordinate with real-world systems.</p>\n<p>Everything else risks becoming investor theater: software built because AI made it easy to build, not because it creates durable value.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1369,7 +1396,7 @@
       "color": "#facc15",
       "order": 8,
       "body": "# AI Bubble\n\nThe AI bubble is not that AI is useless. The bubble is that many people mistake newly cheap software for durable value.\n\nWhen software becomes easy to produce, more software appears. A person can turn a job they once performed into a small interface, attach an agent, add onboarding, and call it a company. The product may work. It may even earn money for a while. But temporary usefulness is not the same as deep value.\n\nThe deeper question is whether the company controls a frontier. Does it own scarce compute? Does it build machines? Does it produce knowledge? Does it verify reality? Does it coordinate agents with real systems? Or does it merely wrap a workflow that every user will soon hand to their own agent?\n\nThe bubble bursts when the market learns to separate capability from packaging.",
-      "html": "<p># AI Bubble</p>\n<p>The AI bubble is not that AI is useless. The bubble is that many people mistake newly cheap software for durable value.</p>\n<p>When software becomes easy to produce, more software appears. A person can turn a job they once performed into a small interface, attach an agent, add onboarding, and call it a company. The product may work. It may even earn money for a while. But temporary usefulness is not the same as deep value.</p>\n<p>The deeper question is whether the company controls a frontier. Does it own scarce compute? Does it build machines? Does it produce knowledge? Does it verify reality? Does it coordinate agents with real systems? Or does it merely wrap a workflow that every user will soon hand to their own agent?</p>\n<p>The bubble bursts when the market learns to separate capability from packaging.</p>",
+      "html": "<h2>AI Bubble</h2>\n<p>The AI bubble is not that AI is useless. The bubble is that many people mistake newly cheap software for durable value.</p>\n<p>When software becomes easy to produce, more software appears. A person can turn a job they once performed into a small interface, attach an agent, add onboarding, and call it a company. The product may work. It may even earn money for a while. But temporary usefulness is not the same as deep value.</p>\n<p>The deeper question is whether the company controls a frontier. Does it own scarce compute? Does it build machines? Does it produce knowledge? Does it verify reality? Does it coordinate agents with real systems? Or does it merely wrap a workflow that every user will soon hand to their own agent?</p>\n<p>The bubble bursts when the market learns to separate capability from packaging.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1396,14 +1423,14 @@
       "color": "#5eead4",
       "order": 8,
       "body": "# BCI as Final Interface\n\nLanguage is the first mass interface to AI because language is portable, expressive, and already human.\n\nBut language is slow. It requires the mind to compress desire into words, wait for response, correct the response, and repeat. A mature human-AI interface may move closer to intention itself: preference, attention, memory, image, mood, and motor desire.\n\nBrain-computer interfaces point toward this final interface. Not because every thought should be exposed, but because the distance between intention and machine action will keep shrinking.\n\nThe danger is obvious. If the interface reaches the nervous system, then privacy, agency, consent, and manipulation become biological questions, not just software questions.",
-      "html": "<p># BCI as Final Interface</p>\n<p>Language is the first mass interface to AI because language is portable, expressive, and already human.</p>\n<p>But language is slow. It requires the mind to compress desire into words, wait for response, correct the response, and repeat. A mature human-AI interface may move closer to intention itself: preference, attention, memory, image, mood, and motor desire.</p>\n<p>Brain-computer interfaces point toward this final interface. Not because every thought should be exposed, but because the distance between intention and machine action will keep shrinking.</p>\n<p>The danger is obvious. If the interface reaches the nervous system, then privacy, agency, consent, and manipulation become biological questions, not just software questions.</p>",
+      "html": "<h2>BCI as Final Interface</h2>\n<p>Language is the first mass interface to AI because language is portable, expressive, and already human.</p>\n<p>But language is slow. It requires the mind to compress desire into words, wait for response, correct the response, and repeat. A mature human-AI interface may move closer to intention itself: preference, attention, memory, image, mood, and motor desire.</p>\n<p>Brain-computer interfaces point toward this final interface. Not because every thought should be exposed, but because the distance between intention and machine action will keep shrinking.</p>\n<p>The danger is obvious. If the interface reaches the nervous system, then privacy, agency, consent, and manipulation become biological questions, not just software questions.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "BCI as Final Interface"
       ],
-      "angle": 1.0670308381510787
+      "angle": 0.9901387102660139
     },
     {
       "id": "lending-means-of-production",
@@ -1423,7 +1450,7 @@
       "color": "#facc15",
       "order": 9,
       "body": "# Lending Means of Production\n\nIf autonomy is produced by machines, then inequality becomes a question of access to machines.\n\nSome people will own compute, storage, robots, printers, food machines, and energy systems. Others will need to rent them. The old subscription economy sold access to software. The new access economy sells access to production itself.\n\nThis does not only mean factories. It also means local machines that perform domestic labor, personal devices that host AI models, shared robot fleets, community food systems, and workshops where physical goods can be generated from designs.\n\nThe political question is whether productive autonomy becomes a luxury or a commons. Neo-Koinonia must ask who gets to command machines, who only borrows them, and what forms of collective ownership can prevent autonomy from becoming another enclosure.",
-      "html": "<p># Lending Means of Production</p>\n<p>If autonomy is produced by machines, then inequality becomes a question of access to machines.</p>\n<p>Some people will own compute, storage, robots, printers, food machines, and energy systems. Others will need to rent them. The old subscription economy sold access to software. The new access economy sells access to production itself.</p>\n<p>This does not only mean factories. It also means local machines that perform domestic labor, personal devices that host AI models, shared robot fleets, community food systems, and workshops where physical goods can be generated from designs.</p>\n<p>The political question is whether productive autonomy becomes a luxury or a commons. Neo-Koinonia must ask who gets to command machines, who only borrows them, and what forms of collective ownership can prevent autonomy from becoming another enclosure.</p>",
+      "html": "<h2>Lending Means of Production</h2>\n<p>If autonomy is produced by machines, then inequality becomes a question of access to machines.</p>\n<p>Some people will own compute, storage, robots, printers, food machines, and energy systems. Others will need to rent them. The old subscription economy sold access to software. The new access economy sells access to production itself.</p>\n<p>This does not only mean factories. It also means local machines that perform domestic labor, personal devices that host AI models, shared robot fleets, community food systems, and workshops where physical goods can be generated from designs.</p>\n<p>The political question is whether productive autonomy becomes a luxury or a commons. Neo-Koinonia must ask who gets to command machines, who only borrows them, and what forms of collective ownership can prevent autonomy from becoming another enclosure.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "Collective Order",
@@ -1450,14 +1477,14 @@
       "color": "#5eead4",
       "order": 9,
       "body": "# Service Robots\n\nMany services are not fundamentally digital. They are physical acts coordinated by intelligence.\n\nCleaning, moving, repairing, cooking, delivering, inspecting, assembling, and caring all require bodies. AI can plan these services before it can perform them. Robots complete the circuit: the agent leaves the screen and acts in matter.\n\nThe service robot economy is therefore not separate from AI. It is AI with limbs, sensors, tools, and liability. The product is no longer a dashboard that tells a worker what to do. The product is a system that does the work.\n\nThis changes the meaning of labor. Human work stops being the default way services enter the world.",
-      "html": "<p># Service Robots</p>\n<p>Many services are not fundamentally digital. They are physical acts coordinated by intelligence.</p>\n<p>Cleaning, moving, repairing, cooking, delivering, inspecting, assembling, and caring all require bodies. AI can plan these services before it can perform them. Robots complete the circuit: the agent leaves the screen and acts in matter.</p>\n<p>The service robot economy is therefore not separate from AI. It is AI with limbs, sensors, tools, and liability. The product is no longer a dashboard that tells a worker what to do. The product is a system that does the work.</p>\n<p>This changes the meaning of labor. Human work stops being the default way services enter the world.</p>",
+      "html": "<h2>Service Robots</h2>\n<p>Many services are not fundamentally digital. They are physical acts coordinated by intelligence.</p>\n<p>Cleaning, moving, repairing, cooking, delivering, inspecting, assembling, and caring all require bodies. AI can plan these services before it can perform them. Robots complete the circuit: the agent leaves the screen and acts in matter.</p>\n<p>The service robot economy is therefore not separate from AI. It is AI with limbs, sensors, tools, and liability. The product is no longer a dashboard that tells a worker what to do. The product is a system that does the work.</p>\n<p>This changes the meaning of labor. Human work stops being the default way services enter the world.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Service Robots"
       ],
-      "angle": 1.1384306711872103
+      "angle": 1.0505539536042792
     },
     {
       "id": "food-as-last-problem",
@@ -1477,14 +1504,14 @@
       "color": "#5eead4",
       "order": 10,
       "body": "# Food as Last Problem\n\nFood may be one of the last ordinary goods to become fully automated.\n\nSoftware can be generated. Furniture can be printed. Machines can be assembled by other machines. But food sits at the intersection of biology, safety, energy, taste, freshness, habit, culture, and trust.\n\nLab food machines may eventually grow proteins, nutrients, and meals close to the point of use. Automated farms may become more robotic and more controlled. But food is not only input. It is ritual, comfort, identity, and risk.\n\nThis makes food a hard frontier for autonomy. A civilization that can automate food has crossed from digital abundance into biological production.",
-      "html": "<p># Food as Last Problem</p>\n<p>Food may be one of the last ordinary goods to become fully automated.</p>\n<p>Software can be generated. Furniture can be printed. Machines can be assembled by other machines. But food sits at the intersection of biology, safety, energy, taste, freshness, habit, culture, and trust.</p>\n<p>Lab food machines may eventually grow proteins, nutrients, and meals close to the point of use. Automated farms may become more robotic and more controlled. But food is not only input. It is ritual, comfort, identity, and risk.</p>\n<p>This makes food a hard frontier for autonomy. A civilization that can automate food has crossed from digital abundance into biological production.</p>",
+      "html": "<h2>Food as Last Problem</h2>\n<p>Food may be one of the last ordinary goods to become fully automated.</p>\n<p>Software can be generated. Furniture can be printed. Machines can be assembled by other machines. But food sits at the intersection of biology, safety, energy, taste, freshness, habit, culture, and trust.</p>\n<p>Lab food machines may eventually grow proteins, nutrients, and meals close to the point of use. Automated farms may become more robotic and more controlled. But food is not only input. It is ritual, comfort, identity, and risk.</p>\n<p>This makes food a hard frontier for autonomy. A civilization that can automate food has crossed from digital abundance into biological production.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Food as Last Problem"
       ],
-      "angle": 1.2098305042233422
+      "angle": 1.1109691969425444
     },
     {
       "id": "compute",
@@ -1503,14 +1530,14 @@
       "color": "#5eead4",
       "order": 11,
       "body": "# Compute\n\nCompute becomes one of the basic materials of Neo-Koinonia.\n\nIt is not merely server capacity. It is the substrate through which agents reason, generate media, run simulations, coordinate robots, search designs, and operate production systems.\n\nWhen software is cheap, compute remains scarce. The valuable question is no longer only what can be coded, but what can be run, at what cost, with what latency, under whose control, and with what guarantees.\n\nCompute is the heat of intelligence made economic.",
-      "html": "<p># Compute</p>\n<p>Compute becomes one of the basic materials of Neo-Koinonia.</p>\n<p>It is not merely server capacity. It is the substrate through which agents reason, generate media, run simulations, coordinate robots, search designs, and operate production systems.</p>\n<p>When software is cheap, compute remains scarce. The valuable question is no longer only what can be coded, but what can be run, at what cost, with what latency, under whose control, and with what guarantees.</p>\n<p>Compute is the heat of intelligence made economic.</p>",
+      "html": "<h2>Compute</h2>\n<p>Compute becomes one of the basic materials of Neo-Koinonia.</p>\n<p>It is not merely server capacity. It is the substrate through which agents reason, generate media, run simulations, coordinate robots, search designs, and operate production systems.</p>\n<p>When software is cheap, compute remains scarce. The valuable question is no longer only what can be coded, but what can be run, at what cost, with what latency, under whose control, and with what guarantees.</p>\n<p>Compute is the heat of intelligence made economic.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Compute"
       ],
-      "angle": 1.2812303372594738
+      "angle": 1.1713844402808096
     },
     {
       "id": "storage",
@@ -1529,14 +1556,95 @@
       "color": "#5eead4",
       "order": 12,
       "body": "# Storage\n\nStorage is the quiet half of autonomy.\n\nAgents need memory: preferences, histories, contracts, identities, permissions, logs, training material, and evidence. Entertainment factories need worlds. Research systems need records. Institutions need audit trails. Without storage, intelligence becomes amnesiac and power becomes unaccountable.\n\nThe future struggle over data is not only privacy. It is custody. Who keeps the memory that agents use to act on behalf of a person? Who can move it? Who can erase it? Who can prove what happened?\n\nStorage is where personal continuity and social accountability meet.",
-      "html": "<p># Storage</p>\n<p>Storage is the quiet half of autonomy.</p>\n<p>Agents need memory: preferences, histories, contracts, identities, permissions, logs, training material, and evidence. Entertainment factories need worlds. Research systems need records. Institutions need audit trails. Without storage, intelligence becomes amnesiac and power becomes unaccountable.</p>\n<p>The future struggle over data is not only privacy. It is custody. Who keeps the memory that agents use to act on behalf of a person? Who can move it? Who can erase it? Who can prove what happened?</p>\n<p>Storage is where personal continuity and social accountability meet.</p>",
+      "html": "<h2>Storage</h2>\n<p>Storage is the quiet half of autonomy.</p>\n<p>Agents need memory: preferences, histories, contracts, identities, permissions, logs, training material, and evidence. Entertainment factories need worlds. Research systems need records. Institutions need audit trails. Without storage, intelligence becomes amnesiac and power becomes unaccountable.</p>\n<p>The future struggle over data is not only privacy. It is custody. Who keeps the memory that agents use to act on behalf of a person? Who can move it? Who can erase it? Who can prove what happened?</p>\n<p>Storage is where personal continuity and social accountability meet.</p>",
       "path": [
         "Neo-Koinonia / Society",
         "World / Substrate",
         "Technology",
         "Storage"
       ],
+      "angle": 1.2317996836190748
+    },
+    {
+      "id": "operating-system",
+      "title": "Operating System",
+      "description": "The system layer that may be compressed into agent reasoning, permissions, tools, data, and generated UI.",
+      "tags": [
+        "operating-system",
+        "llmos",
+        "agents",
+        "kernel",
+        "interface"
+      ],
+      "parent": "technology",
+      "level": 3,
+      "group": "infrastructure",
+      "groupLabel": "Technology",
+      "color": "#5eead4",
+      "order": 13,
+      "body": "# Operating System\n\nThe operating system was built for direct manipulation: windows, files, applications, devices, permissions, processes.\n\nAn agentic computer changes the center of gravity. The user no longer needs to personally traverse every tool. The system can interpret intention, call capabilities, retrieve context, update state, and render the next useful interface.\n\nThe old OS does not disappear immediately. It becomes the training ground and scaffolding for the next one.",
+      "html": "<h2>Operating System</h2>\n<p>The operating system was built for direct manipulation: windows, files, applications, devices, permissions, processes.</p>\n<p>An agentic computer changes the center of gravity. The user no longer needs to personally traverse every tool. The system can interpret intention, call capabilities, retrieve context, update state, and render the next useful interface.</p>\n<p>The old OS does not disappear immediately. It becomes the training ground and scaffolding for the next one.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System"
+      ],
+      "angle": 1.2922149269573402
+    },
+    {
+      "id": "data",
+      "title": "Data",
+      "description": "The state and memory layer that agents read, transform, verify, and re-render as interface.",
+      "tags": [
+        "data",
+        "ui-state",
+        "memory",
+        "agents",
+        "retrieval"
+      ],
+      "parent": "technology",
+      "level": 3,
+      "group": "infrastructure",
+      "groupLabel": "Technology",
+      "color": "#5eead4",
+      "order": 14,
+      "body": "# Data\n\nData is no longer only something a human views through an application.\n\nIn an agentic system, data is state to be read, permissioned, transformed, verified, and re-rendered. The interface becomes one possible view of that state, not the permanent container for it.\n\nThe new question is not only where the data is stored. It is what portion of the state is relevant, what actions are permitted, and how the agent can represent it compactly enough to reason over it.",
+      "html": "<h2>Data</h2>\n<p>Data is no longer only something a human views through an application.</p>\n<p>In an agentic system, data is state to be read, permissioned, transformed, verified, and re-rendered. The interface becomes one possible view of that state, not the permanent container for it.</p>\n<p>The new question is not only where the data is stored. It is what portion of the state is relevant, what actions are permitted, and how the agent can represent it compactly enough to reason over it.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Data"
+      ],
       "angle": 1.3526301702956054
+    },
+    {
+      "id": "chat-as-first-interface",
+      "title": "Chat as the First Interface",
+      "description": "Chat was the first widely discovered interface to AI, not the final one.",
+      "tags": [
+        "interface",
+        "chat",
+        "ai",
+        "agents"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 1,
+      "body": "# Chat as the First Interface\n\nChat was the first interface through which ordinary people touched artificial intelligence.\n\nThis was natural. Language is the human universal API. It carries requests, memory, emotion, ambiguity, commands, and explanation. When AI first became useful, the easiest way to expose it was to put a text box in front of it.\n\nBut chat is not the final form.\n\nChat is slow, sequential, and trapped inside language. It makes the user translate intention into words, then makes the model translate action back into words. This works for explanation, but it is clumsy for operation. A person does not want a paragraph about a flight search when they need a living set of filters, maps, choices, prices, and confirmations.\n\nChat revealed the phenomenon. Agents extended it. The next interface must stop treating AI as a talking document and start treating it as an operating intelligence.",
+      "html": "<h2>Chat as the First Interface</h2>\n<p>Chat was the first interface through which ordinary people touched artificial intelligence.</p>\n<p>This was natural. Language is the human universal API. It carries requests, memory, emotion, ambiguity, commands, and explanation. When AI first became useful, the easiest way to expose it was to put a text box in front of it.</p>\n<p>But chat is not the final form.</p>\n<p>Chat is slow, sequential, and trapped inside language. It makes the user translate intention into words, then makes the model translate action back into words. This works for explanation, but it is clumsy for operation. A person does not want a paragraph about a flight search when they need a living set of filters, maps, choices, prices, and confirmations.</p>\n<p>Chat revealed the phenomenon. Agents extended it. The next interface must stop treating AI as a talking document and start treating it as an operating intelligence.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "Chat as the First Interface"
+      ],
+      "angle": 0.43431847155397363
     },
     {
       "id": "context-kernel",
@@ -1561,6 +1669,34 @@
       "angle": -1.3177235852557188
     },
     {
+      "id": "llmos-operating-system",
+      "title": "LLMOS as Operating System",
+      "description": "A language-model operating system that coordinates tools, memory, retrieval, filesystems, and generated interfaces.",
+      "tags": [
+        "llmos",
+        "operating-system",
+        "agents",
+        "tools",
+        "ai"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 1,
+      "body": "# LLMOS as Operating System\n\nLLMOS is the idea that the language model becomes the coordinating layer of the computer.\n\nThe traditional operating system coordinates files, processes, memory, permissions, input, output, and devices. An LLMOS coordinates intention, tools, context, retrieval, interface, and action.\n\nIn the early version, this looks like an agent harness. The model can use tools, remember facts, search the internet, read and write files, call APIs, and operate software. But this is still grafted onto an old operating system designed for direct human manipulation.\n\nThe deeper version is stranger. The model becomes the place where user intention is interpreted, routed, checked, and converted into action. The OS becomes less visible. Applications become less important. The primary loop becomes:\n\nintention, context, tool use, state update, generated interface.\n\nLLMOS is not merely an AI assistant inside the OS. It is the possibility that the OS itself becomes model-shaped.",
+      "html": "<h2>LLMOS as Operating System</h2>\n<p>LLMOS is the idea that the language model becomes the coordinating layer of the computer.</p>\n<p>The traditional operating system coordinates files, processes, memory, permissions, input, output, and devices. An LLMOS coordinates intention, tools, context, retrieval, interface, and action.</p>\n<p>In the early version, this looks like an agent harness. The model can use tools, remember facts, search the internet, read and write files, call APIs, and operate software. But this is still grafted onto an old operating system designed for direct human manipulation.</p>\n<p>The deeper version is stranger. The model becomes the place where user intention is interpreted, routed, checked, and converted into action. The OS becomes less visible. Applications become less important. The primary loop becomes:</p>\n<p>intention, context, tool use, state update, generated interface.</p>\n<p>LLMOS is not merely an AI assistant inside the OS. It is the possibility that the OS itself becomes model-shaped.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "LLMOS as Operating System"
+      ],
+      "angle": 0.9780556615983609
+    },
+    {
       "id": "sensor-architecture",
       "title": "Sensor Architecture",
       "description": "",
@@ -1581,6 +1717,90 @@
         "Sensor Architecture"
       ],
       "angle": 0.07853981633974483
+    },
+    {
+      "id": "toon-ui-state",
+      "title": "TOON UI State",
+      "description": "A compact textual representation of focused UI state for agent processing.",
+      "tags": [
+        "toon",
+        "ui-state",
+        "agents",
+        "data-format",
+        "interface"
+      ],
+      "parent": "data",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Data",
+      "color": "#5eead4",
+      "order": 1,
+      "body": "# TOON UI State\n\nAgents need to read interfaces without drowning in irrelevant structure.\n\nJSON is universal, but it can become bloated. Screens contain hierarchy, labels, values, actions, permissions, focus, selection, and user intent. Passing all of this to a model as raw UI state can waste tokens and obscure meaning.\n\nA compact format such as TOON can represent the focused interface as structured text: what the user is looking at, what can be changed, what actions are available, what data is visible, and what constraints apply.\n\nThe focused UI becomes the prompt substrate.\n\nThe agent does not need the whole operating system. It needs the current actionable state. From that state, it can decide what to retrieve, what to change, what to ask, and what interface to return.",
+      "html": "<h2>TOON UI State</h2>\n<p>Agents need to read interfaces without drowning in irrelevant structure.</p>\n<p>JSON is universal, but it can become bloated. Screens contain hierarchy, labels, values, actions, permissions, focus, selection, and user intent. Passing all of this to a model as raw UI state can waste tokens and obscure meaning.</p>\n<p>A compact format such as TOON can represent the focused interface as structured text: what the user is looking at, what can be changed, what actions are available, what data is visible, and what constraints apply.</p>\n<p>The focused UI becomes the prompt substrate.</p>\n<p>The agent does not need the whole operating system. It needs the current actionable state. From that state, it can decide what to retrieve, what to change, what to ask, and what interface to return.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Data",
+        "TOON UI State"
+      ],
+      "angle": 1.038470904936626
+    },
+    {
+      "id": "focused-ui-state",
+      "title": "Focused UI State",
+      "description": "The current actionable portion of interface state that an agent reads before transforming it.",
+      "tags": [
+        "ui-state",
+        "focus",
+        "agents",
+        "interface",
+        "data"
+      ],
+      "parent": "data",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Data",
+      "color": "#5eead4",
+      "order": 2,
+      "body": "# Focused UI State\n\nFocused UI state is the part of the computer that currently matters.\n\nIt includes what the user is looking at, which object is selected, what values are visible, what actions are available, what permissions apply, and what the user is trying to change.\n\nThe agent does not need to swallow the whole operating system. It needs the focused state, compressed into a form it can reason over, then transformed into the next useful interface.",
+      "html": "<h2>Focused UI State</h2>\n<p>Focused UI state is the part of the computer that currently matters.</p>\n<p>It includes what the user is looking at, which object is selected, what values are visible, what actions are available, what permissions apply, and what the user is trying to change.</p>\n<p>The agent does not need to swallow the whole operating system. It needs the focused state, compressed into a form it can reason over, then transformed into the next useful interface.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Data",
+        "Focused UI State"
+      ],
+      "angle": 1.6667894356545847
+    },
+    {
+      "id": "minimal-model-kernel",
+      "title": "Minimal Model Kernel",
+      "description": "A small language model stripped of encyclopedic facts and tuned for reasoning, tool use, retrieval, and UI generation.",
+      "tags": [
+        "llmos",
+        "small-models",
+        "tool-use",
+        "retrieval",
+        "kernel"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 2,
+      "body": "# Minimal Model Kernel\n\nThe ideal LLMOS may not require a giant model stuffed with facts.\n\nIt may require a smaller model that keeps language understanding, reasoning, planning, and tool-use competence while externalizing factual memory into retrieval systems. The model does not need to know everything. It needs to know how to find, verify, compose, and act.\n\nFacts live in the second brain, the local data store, the filesystem, institutional databases, and the internet. The model becomes a kernel of interpretation and orchestration.\n\nThis is a different idea of intelligence. Not one mind that memorizes the world, but one mind that knows how to use the world as memory.\n\nThe minimal model kernel should be trained less like a chatbot and more like an operator: read state, infer intention, select tools, retrieve facts, verify outputs, update state, and generate the next interface.",
+      "html": "<h2>Minimal Model Kernel</h2>\n<p>The ideal LLMOS may not require a giant model stuffed with facts.</p>\n<p>It may require a smaller model that keeps language understanding, reasoning, planning, and tool-use competence while externalizing factual memory into retrieval systems. The model does not need to know everything. It needs to know how to find, verify, compose, and act.</p>\n<p>Facts live in the second brain, the local data store, the filesystem, institutional databases, and the internet. The model becomes a kernel of interpretation and orchestration.</p>\n<p>This is a different idea of intelligence. Not one mind that memorizes the world, but one mind that knows how to use the world as memory.</p>\n<p>The minimal model kernel should be trained less like a chatbot and more like an operator: read state, infer intention, select tools, retrieve facts, verify outputs, update state, and generate the next interface.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "Minimal Model Kernel"
+      ],
+      "angle": 1.0827754167180206
     },
     {
       "id": "task-native-bodies",
@@ -1625,6 +1845,312 @@
         "Tool Contracts"
       ],
       "angle": -0.6894050545377601
+    },
+    {
+      "id": "voice-interface",
+      "title": "Voice Interface",
+      "description": "Voice turns interaction with AI into intention transmission rather than manual manipulation.",
+      "tags": [
+        "voice",
+        "interface",
+        "ai",
+        "intention",
+        "agents"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 2,
+      "body": "# Voice Interface\n\nVoice is a transitional interface between typing and intention.\n\nDictation makes visible how little manual interaction remains necessary once AI can absorb language, hold context, and operate tools. The user does less keyboard work and more intention transmission. The computer becomes less like a surface to manipulate and more like a listener that can act.\n\nVoice is still language, so it still carries the limits of language. But it loosens the body from the keyboard and reveals the direction of travel: less clicking, less typing, more direct communication of intent.\n\nThe next step is not merely better speech recognition. It is an interface that understands the current state, the focused task, the available actions, and the user's desired transformation.",
+      "html": "<h2>Voice Interface</h2>\n<p>Voice is a transitional interface between typing and intention.</p>\n<p>Dictation makes visible how little manual interaction remains necessary once AI can absorb language, hold context, and operate tools. The user does less keyboard work and more intention transmission. The computer becomes less like a surface to manipulate and more like a listener that can act.</p>\n<p>Voice is still language, so it still carries the limits of language. But it loosens the body from the keyboard and reveals the direction of travel: less clicking, less typing, more direct communication of intent.</p>\n<p>The next step is not merely better speech recognition. It is an interface that understands the current state, the focused task, the available actions, and the user&#039;s desired transformation.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "Voice Interface"
+      ],
+      "angle": 0.5390382266736334
+    },
+    {
+      "id": "bci-intent-interface",
+      "title": "BCI Intent Interface",
+      "description": "Brain-computer interfaces may eventually bypass language and translate intention into model latent space.",
+      "tags": [
+        "bci",
+        "interface",
+        "intention",
+        "latent-space",
+        "ai"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 3,
+      "body": "# BCI Intent Interface\n\nLanguage is an abstraction over thought.\n\nIt is powerful, but it is also lossy. Before a person can ask an AI for something, they must compress intention into words. The model then expands those words back into a possible intention. This introduces friction, ambiguity, and performance loss.\n\nA brain-computer interface suggests a deeper path: thought or intention translated directly into the latent space of an omni-model.\n\nThis would not merely make prompting faster. It would change the nature of prompting. Instead of describing the shape of a desired action, the user could transmit something closer to the pre-linguistic impulse: the image, direction, memory, preference, or felt constraint behind the words.\n\nBCI is not the whole interface, because it mostly solves input. The system still needs output. If language is too narrow on the way in, it is also too narrow on the way out. The answer may be generated interface: maps, controls, simulations, forms, timelines, graphs, and worlds.",
+      "html": "<h2>BCI Intent Interface</h2>\n<p>Language is an abstraction over thought.</p>\n<p>It is powerful, but it is also lossy. Before a person can ask an AI for something, they must compress intention into words. The model then expands those words back into a possible intention. This introduces friction, ambiguity, and performance loss.</p>\n<p>A brain-computer interface suggests a deeper path: thought or intention translated directly into the latent space of an omni-model.</p>\n<p>This would not merely make prompting faster. It would change the nature of prompting. Instead of describing the shape of a desired action, the user could transmit something closer to the pre-linguistic impulse: the image, direction, memory, preference, or felt constraint behind the words.</p>\n<p>BCI is not the whole interface, because it mostly solves input. The system still needs output. If language is too narrow on the way in, it is also too narrow on the way out. The answer may be generated interface: maps, controls, simulations, forms, timelines, graphs, and worlds.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "BCI Intent Interface"
+      ],
+      "angle": 0.6437579817932931
+    },
+    {
+      "id": "post-os-agent-computer",
+      "title": "Post-OS Agent Computer",
+      "description": "The long-term compression of the computer into model inference, data storage, permissions, and generated UI.",
+      "tags": [
+        "post-os",
+        "llmos",
+        "agents",
+        "kernel",
+        "computing"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 3,
+      "body": "# Post-OS Agent Computer\n\n![From Chat to Post-OS Agent Computer](/images/from-chat-to-post-os-agent-computer.png)\n\nThe first stage is an agent app that overlays the existing operating system.\n\nIt watches the focused interface, listens to voice, accepts text, calls tools, and manipulates applications on behalf of the user. This is useful, but it is still parasitic on the old computer.\n\nThe second stage is direct system interaction. The agent talks to system calls and privileged services. It no longer needs to click through human-designed UI when it can request the underlying operation.\n\nThe third stage is kernel-level integration. The bloated application layer begins to disappear because many tools were only human-facing wrappers around file access, network calls, rendering, storage, and permissions.\n\nThe final stage is a post-OS agent computer: efficient model inference, a data store, a permission system, tool bindings, and generated UI.\n\nOld operating systems may remain as training scaffolds. They contain decades of examples of human intent encoded into software workflows. But once models learn those workflows deeply enough, the old OS becomes less like the future and more like the fossil record of human-computer interaction.",
+      "html": "<h2>Post-OS Agent Computer</h2>\n<figure><img src=\"/images/from-chat-to-post-os-agent-computer.png\" alt=\"From Chat to Post-OS Agent Computer\" loading=\"lazy\" /></figure>\n<p>The first stage is an agent app that overlays the existing operating system.</p>\n<p>It watches the focused interface, listens to voice, accepts text, calls tools, and manipulates applications on behalf of the user. This is useful, but it is still parasitic on the old computer.</p>\n<p>The second stage is direct system interaction. The agent talks to system calls and privileged services. It no longer needs to click through human-designed UI when it can request the underlying operation.</p>\n<p>The third stage is kernel-level integration. The bloated application layer begins to disappear because many tools were only human-facing wrappers around file access, network calls, rendering, storage, and permissions.</p>\n<p>The final stage is a post-OS agent computer: efficient model inference, a data store, a permission system, tool bindings, and generated UI.</p>\n<p>Old operating systems may remain as training scaffolds. They contain decades of examples of human intent encoded into software workflows. But once models learn those workflows deeply enough, the old OS becomes less like the future and more like the fossil record of human-computer interaction.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "Post-OS Agent Computer"
+      ],
+      "angle": 1.1874951718376805
+    },
+    {
+      "id": "a2ui-agent-to-user-interface",
+      "title": "A2UI",
+      "description": "Agent-to-User Interface, where agents return safe structured UI blueprints instead of only text.",
+      "tags": [
+        "a2ui",
+        "interface",
+        "agents",
+        "ui",
+        "protocols"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 4,
+      "body": "# A2UI\n\nA2UI means Agent-to-User Interface.\n\nIt is the idea that an AI agent should not only answer in text. It should be able to return a structured interface: buttons, forms, maps, charts, cards, filters, timelines, sliders, confirmations, and editable states.\n\nThe current chat model is like navigating a website by texting someone who can see the screen. It works, but it is indirect. If a user asks for Italian dinner options nearby, the agent should not only produce prose. It should produce a map, filters, restaurant cards, dietary controls, time options, and a booking confirmation path.\n\nThe important distinction is safety. The agent should not freely execute arbitrary UI code on the user's machine. It should emit a structured blueprint that the client renders using trusted native components. This is safer than generated code because the executable surface belongs to the host application, not the model.\n\nBut A2UI is not automatically safe. The schema, permission model, data boundaries, and action confirmations still matter. A malicious or confused agent can still request bad actions through a beautiful interface.\n\nA2UI turns AI interaction from conversation into living software.",
+      "html": "<h2>A2UI</h2>\n<p>A2UI means Agent-to-User Interface.</p>\n<p>It is the idea that an AI agent should not only answer in text. It should be able to return a structured interface: buttons, forms, maps, charts, cards, filters, timelines, sliders, confirmations, and editable states.</p>\n<p>The current chat model is like navigating a website by texting someone who can see the screen. It works, but it is indirect. If a user asks for Italian dinner options nearby, the agent should not only produce prose. It should produce a map, filters, restaurant cards, dietary controls, time options, and a booking confirmation path.</p>\n<p>The important distinction is safety. The agent should not freely execute arbitrary UI code on the user&#039;s machine. It should emit a structured blueprint that the client renders using trusted native components. This is safer than generated code because the executable surface belongs to the host application, not the model.</p>\n<p>But A2UI is not automatically safe. The schema, permission model, data boundaries, and action confirmations still matter. A malicious or confused agent can still request bad actions through a beautiful interface.</p>\n<p>A2UI turns AI interaction from conversation into living software.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "A2UI"
+      ],
+      "angle": 0.7484777369129529
+    },
+    {
+      "id": "model-inference",
+      "title": "Model Inference",
+      "description": "The execution substrate of the post-OS computer, where models transform intention and state into action and interface.",
+      "tags": [
+        "model-inference",
+        "llmos",
+        "computing",
+        "agents"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 4,
+      "body": "# Model Inference\n\nIn the post-OS computer, model inference becomes the active runtime.\n\nThe old computer runs applications. The agentic computer runs transformations between intention, state, permission, tool action, and generated UI.\n\nThis does not mean everything becomes a single model. It means inference becomes the coordinating act: the place where the system decides what state matters, what tool should be called, what must be confirmed, and what interface should appear next.",
+      "html": "<h2>Model Inference</h2>\n<p>In the post-OS computer, model inference becomes the active runtime.</p>\n<p>The old computer runs applications. The agentic computer runs transformations between intention, state, permission, tool action, and generated UI.</p>\n<p>This does not mean everything becomes a single model. It means inference becomes the coordinating act: the place where the system decides what state matters, what tool should be called, what must be confirmed, and what interface should appear next.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "Model Inference"
+      ],
+      "angle": 1.2922149269573402
+    },
+    {
+      "id": "os-overlay",
+      "title": "OS Overlay",
+      "description": "The first stage of LLMOS, where an agent layer watches and manipulates the existing operating system.",
+      "tags": [
+        "os",
+        "overlay",
+        "agents",
+        "llmos",
+        "interface"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 5,
+      "body": "# OS Overlay\n\nThe first agentic operating system is not a new kernel. It is an overlay.\n\nIt watches the active window, listens to voice, reads screen state, calls tools, and manipulates existing apps. This is useful because it can inhabit the old computer before the old computer is replaced.\n\nBut an overlay is a transitional form. If the agent can understand intention and request operations directly, then clicking through human-facing apps becomes unnecessary ceremony.",
+      "html": "<h2>OS Overlay</h2>\n<p>The first agentic operating system is not a new kernel. It is an overlay.</p>\n<p>It watches the active window, listens to voice, reads screen state, calls tools, and manipulates existing apps. This is useful because it can inhabit the old computer before the old computer is replaced.</p>\n<p>But an overlay is a transitional form. If the agent can understand intention and request operations directly, then clicking through human-facing apps becomes unnecessary ceremony.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "OS Overlay"
+      ],
+      "angle": 1.396934682077
+    },
+    {
+      "id": "unified-editable-ui",
+      "title": "Unified Editable UI",
+      "description": "A single editable interface layer that agents can read, transform, and re-render across applications.",
+      "tags": [
+        "ui",
+        "agents",
+        "a2ui",
+        "interface",
+        "operating-system"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 5,
+      "body": "# Unified Editable UI\n\nThe future interface may not be a collection of apps.\n\nIt may be a unified editable surface that the user can point at, speak to, look at, or eventually think toward. The agent reads the focused UI state, converts it into a compact machine-readable representation, performs the requested operation, and returns a new interface.\n\nThis changes the role of UI.\n\nThe interface is no longer a fixed product designed by one company. It becomes a temporary negotiated surface between user intention, available data, permissions, and agent capability. The user can click, speak, gesture, or look. The agent can recompose the interface around the current task.\n\nIn this model, the screen is not an app launcher. It is a mutable window into the current state of intelligence.\n\nThe main question becomes: what data is being retrieved, from where, under what permission, and with what verification?",
+      "html": "<h2>Unified Editable UI</h2>\n<p>The future interface may not be a collection of apps.</p>\n<p>It may be a unified editable surface that the user can point at, speak to, look at, or eventually think toward. The agent reads the focused UI state, converts it into a compact machine-readable representation, performs the requested operation, and returns a new interface.</p>\n<p>This changes the role of UI.</p>\n<p>The interface is no longer a fixed product designed by one company. It becomes a temporary negotiated surface between user intention, available data, permissions, and agent capability. The user can click, speak, gesture, or look. The agent can recompose the interface around the current task.</p>\n<p>In this model, the screen is not an app launcher. It is a mutable window into the current state of intelligence.</p>\n<p>The main question becomes: what data is being retrieved, from where, under what permission, and with what verification?</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "Unified Editable UI"
+      ],
+      "angle": 0.8531974920326127
+    },
+    {
+      "id": "structured-ui-blueprint",
+      "title": "Structured UI Blueprint",
+      "description": "The safe declarative interface description an agent sends instead of executable UI code.",
+      "tags": [
+        "a2ui",
+        "ui",
+        "schema",
+        "safety",
+        "interface"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 6,
+      "body": "# Structured UI Blueprint\n\nA structured UI blueprint is the safe middle layer between agent reasoning and visible interface.\n\nThe agent does not send arbitrary code. It sends a description: which trusted components to show, what values they contain, what actions they expose, and what confirmations are required.\n\nThe host application remains responsible for rendering, permission checks, and execution. The model proposes a shape; the system decides what can safely become real.",
+      "html": "<h2>Structured UI Blueprint</h2>\n<p>A structured UI blueprint is the safe middle layer between agent reasoning and visible interface.</p>\n<p>The agent does not send arbitrary code. It sends a description: which trusted components to show, what values they contain, what actions they expose, and what confirmations are required.</p>\n<p>The host application remains responsible for rendering, permission checks, and execution. The model proposes a shape; the system decides what can safely become real.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "Structured UI Blueprint"
+      ],
+      "angle": 0.9579172471522724
+    },
+    {
+      "id": "system-calls",
+      "title": "System Calls",
+      "description": "Direct operation requests that let agents bypass human-facing application layers.",
+      "tags": [
+        "system-calls",
+        "os",
+        "agents",
+        "kernel",
+        "tools"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 6,
+      "body": "# System Calls\n\nSystem calls are the point where agentic computing stops pretending to be a human at a screen.\n\nInstead of moving a cursor through menus, the agent requests the underlying operation: read this file, write this state, render this view, move this data, open this channel, confirm this action.\n\nThis requires a permission model stronger than ordinary automation. Direct access is powerful only if the system can constrain, audit, and revoke it.",
+      "html": "<h2>System Calls</h2>\n<p>System calls are the point where agentic computing stops pretending to be a human at a screen.</p>\n<p>Instead of moving a cursor through menus, the agent requests the underlying operation: read this file, write this state, render this view, move this data, open this channel, confirm this action.</p>\n<p>This requires a permission model stronger than ordinary automation. Direct access is powerful only if the system can constrain, audit, and revoke it.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "System Calls"
+      ],
+      "angle": 1.5016544371966598
+    },
+    {
+      "id": "generated-ui",
+      "title": "Generated UI",
+      "description": "Interface produced at the moment of need from state, permissions, and user intention.",
+      "tags": [
+        "generated-ui",
+        "a2ui",
+        "interface",
+        "agents"
+      ],
+      "parent": "interfaces",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Interfaces",
+      "color": "#5eead4",
+      "order": 7,
+      "body": "# Generated UI\n\nGenerated UI is interface produced at the moment of need.\n\nIt is not a permanent app screen. It is a temporary surface shaped by the user's intention, the current state, the available data, and the permission boundary.\n\nThe interface becomes less like a destination and more like a response.",
+      "html": "<h2>Generated UI</h2>\n<p>Generated UI is interface produced at the moment of need.</p>\n<p>It is not a permanent app screen. It is a temporary surface shaped by the user&#039;s intention, the current state, the available data, and the permission boundary.</p>\n<p>The interface becomes less like a destination and more like a response.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Interfaces",
+        "Generated UI"
+      ],
+      "angle": 1.0626370022719323
+    },
+    {
+      "id": "kernel-level-agent-substrate",
+      "title": "Kernel-Level Agent Substrate",
+      "description": "A deeper computing layer where agent operations become native rather than bolted onto applications.",
+      "tags": [
+        "kernel",
+        "agents",
+        "post-os",
+        "llmos",
+        "operating-system"
+      ],
+      "parent": "operating-system",
+      "level": 4,
+      "group": "infrastructure",
+      "groupLabel": "Operating System",
+      "color": "#5eead4",
+      "order": 7,
+      "body": "# Kernel-Level Agent Substrate\n\nA kernel-level agent substrate is the deeper form of the OS overlay.\n\nThe agent is no longer a guest using apps from the outside. Agent operations become native: state access, capability calls, permissions, confirmations, rendering, memory, and audit trails are designed for model-mediated action.\n\nThis is where the bloated application layer begins to thin out. Many apps were human-facing wrappers around operations the agent can request directly.",
+      "html": "<h2>Kernel-Level Agent Substrate</h2>\n<p>A kernel-level agent substrate is the deeper form of the OS overlay.</p>\n<p>The agent is no longer a guest using apps from the outside. Agent operations become native: state access, capability calls, permissions, confirmations, rendering, memory, and audit trails are designed for model-mediated action.</p>\n<p>This is where the bloated application layer begins to thin out. Many apps were human-facing wrappers around operations the agent can request directly.</p>",
+      "path": [
+        "Neo-Koinonia / Society",
+        "World / Substrate",
+        "Technology",
+        "Operating System",
+        "Kernel-Level Agent Substrate"
+      ],
+      "angle": 1.6063741923163195
     }
   ],
   "edges": [
@@ -1867,6 +2393,16 @@
       "body": "A branch from human to Body.",
       "html": "<p>A branch from human to Body.</p>",
       "label": "A branch from human to Body."
+    },
+    {
+      "id": "hybrid-self--extended-mind",
+      "source": "hybrid-self",
+      "target": "extended-mind",
+      "title": "Hybrid Self -> Extended Mind",
+      "color": "#7dd3fc",
+      "body": "The hybrid self extends mind into tools, memory, and interface.",
+      "html": "<p>The hybrid self extends mind into tools, memory, and interface.</p>",
+      "label": "The hybrid self extends mind into tools, memory, and interface."
     },
     {
       "id": "technology--hardware",
@@ -2319,6 +2855,36 @@
       "label": "Storage preserves the context that makes agents personal and institutions accountable."
     },
     {
+      "id": "technology--operating-system",
+      "source": "technology",
+      "target": "operating-system",
+      "title": "Technology -> Operating System",
+      "color": "#5eead4",
+      "body": "The operating system branch follows the old computer as it becomes model-shaped.",
+      "html": "<p>The operating system branch follows the old computer as it becomes model-shaped.</p>",
+      "label": "The operating system branch follows the old computer as it becomes model-shaped."
+    },
+    {
+      "id": "technology--data",
+      "source": "technology",
+      "target": "data",
+      "title": "Technology -> Data",
+      "color": "#5eead4",
+      "body": "Data becomes the substrate that agents transform into action and interface.",
+      "html": "<p>Data becomes the substrate that agents transform into action and interface.</p>",
+      "label": "Data becomes the substrate that agents transform into action and interface."
+    },
+    {
+      "id": "interfaces--chat-as-first-interface",
+      "source": "interfaces",
+      "target": "chat-as-first-interface",
+      "title": "Interfaces -> Chat as the First Interface",
+      "color": "#5eead4",
+      "body": "Chat gave humans the first practical handle on artificial intelligence.",
+      "html": "<p>Chat gave humans the first practical handle on artificial intelligence.</p>",
+      "label": "Chat gave humans the first practical handle on artificial intelligence."
+    },
+    {
       "id": "llmos--context-kernel",
       "source": "llmos",
       "target": "context-kernel",
@@ -2329,6 +2895,16 @@
       "label": "Context becomes the scarce runtime resource that must be scheduled, compressed, and protected."
     },
     {
+      "id": "operating-system--llmos-operating-system",
+      "source": "operating-system",
+      "target": "llmos-operating-system",
+      "title": "Operating System -> LLMOS as Operating System",
+      "color": "#5eead4",
+      "body": "LLMOS names the model-shaped layer where intention becomes computer action.",
+      "html": "<p>LLMOS names the model-shaped layer where intention becomes computer action.</p>",
+      "label": "LLMOS names the model-shaped layer where intention becomes computer action."
+    },
+    {
       "id": "post-humanoid-design--sensor-architecture",
       "source": "post-humanoid-design",
       "target": "sensor-architecture",
@@ -2337,6 +2913,36 @@
       "body": "Rooms become readable to machines without needing to become hostile to humans.",
       "html": "<p>Rooms become readable to machines without needing to become hostile to humans.</p>",
       "label": "Rooms become readable to machines without needing to become hostile to humans."
+    },
+    {
+      "id": "data--toon-ui-state",
+      "source": "data",
+      "target": "toon-ui-state",
+      "title": "Data -> TOON UI State",
+      "color": "#5eead4",
+      "body": "Focused UI state becomes compact prompt substrate for the agent.",
+      "html": "<p>Focused UI state becomes compact prompt substrate for the agent.</p>",
+      "label": "Focused UI state becomes compact prompt substrate for the agent."
+    },
+    {
+      "id": "data--focused-ui-state",
+      "source": "data",
+      "target": "focused-ui-state",
+      "title": "Data -> Focused UI State",
+      "color": "#5eead4",
+      "body": "The agent does not need the whole system, only the focused actionable state.",
+      "html": "<p>The agent does not need the whole system, only the focused actionable state.</p>",
+      "label": "The agent does not need the whole system, only the focused actionable state."
+    },
+    {
+      "id": "operating-system--minimal-model-kernel",
+      "source": "operating-system",
+      "target": "minimal-model-kernel",
+      "title": "Operating System -> Minimal Model Kernel",
+      "color": "#5eead4",
+      "body": "The model kernel keeps orchestration while externalizing factual memory.",
+      "html": "<p>The model kernel keeps orchestration while externalizing factual memory.</p>",
+      "label": "The model kernel keeps orchestration while externalizing factual memory."
     },
     {
       "id": "post-humanoid-design--task-native-bodies",
@@ -2357,6 +2963,116 @@
       "body": "Tools replace apps when every capability exposes a clean contract to the harness.",
       "html": "<p>Tools replace apps when every capability exposes a clean contract to the harness.</p>",
       "label": "Tools replace apps when every capability exposes a clean contract to the harness."
+    },
+    {
+      "id": "interfaces--voice-interface",
+      "source": "interfaces",
+      "target": "voice-interface",
+      "title": "Interfaces -> Voice Interface",
+      "color": "#5eead4",
+      "body": "Voice shows how little manual computer manipulation remains necessary once agents can act.",
+      "html": "<p>Voice shows how little manual computer manipulation remains necessary once agents can act.</p>",
+      "label": "Voice shows how little manual computer manipulation remains necessary once agents can act."
+    },
+    {
+      "id": "interfaces--bci-intent-interface",
+      "source": "interfaces",
+      "target": "bci-intent-interface",
+      "title": "Interfaces -> BCI Intent Interface",
+      "color": "#5eead4",
+      "body": "BCI suggests an interface closer to intention than spoken or written language.",
+      "html": "<p>BCI suggests an interface closer to intention than spoken or written language.</p>",
+      "label": "BCI suggests an interface closer to intention than spoken or written language."
+    },
+    {
+      "id": "operating-system--post-os-agent-computer",
+      "source": "operating-system",
+      "target": "post-os-agent-computer",
+      "title": "Operating System -> Post-OS Agent Computer",
+      "color": "#5eead4",
+      "body": "The post-OS computer compresses apps into inference, data, permissions, tools, and generated interface.",
+      "html": "<p>The post-OS computer compresses apps into inference, data, permissions, tools, and generated interface.</p>",
+      "label": "The post-OS computer compresses apps into inference, data, permissions, tools, and generated interface."
+    },
+    {
+      "id": "interfaces--a2ui-agent-to-user-interface",
+      "source": "interfaces",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "Interfaces -> A2UI",
+      "color": "#5eead4",
+      "body": "A2UI lets agents answer with structured interface rather than only language.",
+      "html": "<p>A2UI lets agents answer with structured interface rather than only language.</p>",
+      "label": "A2UI lets agents answer with structured interface rather than only language."
+    },
+    {
+      "id": "operating-system--model-inference",
+      "source": "operating-system",
+      "target": "model-inference",
+      "title": "Operating System -> Model Inference",
+      "color": "#5eead4",
+      "body": "Model inference becomes the runtime where intention is interpreted and transformed.",
+      "html": "<p>Model inference becomes the runtime where intention is interpreted and transformed.</p>",
+      "label": "Model inference becomes the runtime where intention is interpreted and transformed."
+    },
+    {
+      "id": "operating-system--os-overlay",
+      "source": "operating-system",
+      "target": "os-overlay",
+      "title": "Operating System -> OS Overlay",
+      "color": "#5eead4",
+      "body": "The agent first appears as an overlay on top of the old operating system.",
+      "html": "<p>The agent first appears as an overlay on top of the old operating system.</p>",
+      "label": "The agent first appears as an overlay on top of the old operating system."
+    },
+    {
+      "id": "interfaces--unified-editable-ui",
+      "source": "interfaces",
+      "target": "unified-editable-ui",
+      "title": "Interfaces -> Unified Editable UI",
+      "color": "#5eead4",
+      "body": "A unified editable UI turns the screen into a mutable surface around the current task.",
+      "html": "<p>A unified editable UI turns the screen into a mutable surface around the current task.</p>",
+      "label": "A unified editable UI turns the screen into a mutable surface around the current task."
+    },
+    {
+      "id": "interfaces--structured-ui-blueprint",
+      "source": "interfaces",
+      "target": "structured-ui-blueprint",
+      "title": "Interfaces -> Structured UI Blueprint",
+      "color": "#5eead4",
+      "body": "A structured blueprint lets the host render agent-generated interface safely.",
+      "html": "<p>A structured blueprint lets the host render agent-generated interface safely.</p>",
+      "label": "A structured blueprint lets the host render agent-generated interface safely."
+    },
+    {
+      "id": "operating-system--system-calls",
+      "source": "operating-system",
+      "target": "system-calls",
+      "title": "Operating System -> System Calls",
+      "color": "#5eead4",
+      "body": "Agents move from clicking UI to requesting underlying system operations.",
+      "html": "<p>Agents move from clicking UI to requesting underlying system operations.</p>",
+      "label": "Agents move from clicking UI to requesting underlying system operations."
+    },
+    {
+      "id": "interfaces--generated-ui",
+      "source": "interfaces",
+      "target": "generated-ui",
+      "title": "Interfaces -> Generated UI",
+      "color": "#5eead4",
+      "body": "Generated UI replaces permanent screens with task-specific surfaces.",
+      "html": "<p>Generated UI replaces permanent screens with task-specific surfaces.</p>",
+      "label": "Generated UI replaces permanent screens with task-specific surfaces."
+    },
+    {
+      "id": "operating-system--kernel-level-agent-substrate",
+      "source": "operating-system",
+      "target": "kernel-level-agent-substrate",
+      "title": "Operating System -> Kernel-Level Agent Substrate",
+      "color": "#5eead4",
+      "body": "Agent operations become native when the kernel exposes safe model-shaped primitives.",
+      "html": "<p>Agent operations become native when the kernel exposes safe model-shaped primitives.</p>",
+      "label": "Agent operations become native when the kernel exposes safe model-shaped primitives."
     },
     {
       "id": "rel:communication--government:enables",
@@ -2524,6 +3240,39 @@
       "relation": true
     },
     {
+      "id": "rel:extended-mind--voice-interface:begins-through",
+      "source": "extended-mind",
+      "target": "voice-interface",
+      "title": "Extended Mind begins through Voice Interface",
+      "color": "#5eead4",
+      "body": "begins through",
+      "html": "<p>begins through</p>",
+      "label": "begins through",
+      "relation": true
+    },
+    {
+      "id": "rel:extended-mind--bci-intent-interface:deepens-through",
+      "source": "extended-mind",
+      "target": "bci-intent-interface",
+      "title": "Extended Mind deepens through BCI Intent Interface",
+      "color": "#5eead4",
+      "body": "deepens through",
+      "html": "<p>deepens through</p>",
+      "label": "deepens through",
+      "relation": true
+    },
+    {
+      "id": "rel:extended-mind--a2ui-agent-to-user-interface:closes-the-loop-with",
+      "source": "extended-mind",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "Extended Mind closes the loop with A2UI",
+      "color": "#5eead4",
+      "body": "closes the loop with",
+      "html": "<p>closes the loop with</p>",
+      "label": "closes the loop with",
+      "relation": true
+    },
+    {
       "id": "rel:hybrid-self--human:mediates",
       "source": "hybrid-self",
       "target": "human",
@@ -2634,6 +3383,17 @@
       "relation": true
     },
     {
+      "id": "rel:post-work-human--unified-editable-ui:works-through",
+      "source": "post-work-human",
+      "target": "unified-editable-ui",
+      "title": "Post-Work Human works through Unified Editable UI",
+      "color": "#5eead4",
+      "body": "works through",
+      "html": "<p>works through</p>",
+      "label": "works through",
+      "relation": true
+    },
+    {
       "id": "rel:research-and-verification--science:extends",
       "source": "research-and-verification",
       "target": "science",
@@ -2719,6 +3479,17 @@
       "body": "requires",
       "html": "<p>requires</p>",
       "label": "requires",
+      "relation": true
+    },
+    {
+      "id": "rel:post-saas-economy--a2ui-agent-to-user-interface:is-accelerated-by",
+      "source": "post-saas-economy",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "Post-SaaS Economy is accelerated by A2UI",
+      "color": "#5eead4",
+      "body": "is accelerated by",
+      "html": "<p>is accelerated by</p>",
+      "label": "is accelerated by",
       "relation": true
     },
     {
@@ -2942,6 +3713,39 @@
       "relation": true
     },
     {
+      "id": "rel:interfaces--chat-as-first-interface:begins-with",
+      "source": "interfaces",
+      "target": "chat-as-first-interface",
+      "title": "Interfaces begins with Chat as the First Interface",
+      "color": "#5eead4",
+      "body": "begins with",
+      "html": "<p>begins with</p>",
+      "label": "begins with",
+      "relation": true
+    },
+    {
+      "id": "rel:interfaces--a2ui-agent-to-user-interface:evolves-toward",
+      "source": "interfaces",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "Interfaces evolves toward A2UI",
+      "color": "#5eead4",
+      "body": "evolves toward",
+      "html": "<p>evolves toward</p>",
+      "label": "evolves toward",
+      "relation": true
+    },
+    {
+      "id": "rel:interfaces--unified-editable-ui:converges-into",
+      "source": "interfaces",
+      "target": "unified-editable-ui",
+      "title": "Interfaces converges into Unified Editable UI",
+      "color": "#5eead4",
+      "body": "converges into",
+      "html": "<p>converges into</p>",
+      "label": "converges into",
+      "relation": true
+    },
+    {
       "id": "rel:ai-coding-harnesses--software:transforms",
       "source": "ai-coding-harnesses",
       "target": "software",
@@ -2994,6 +3798,17 @@
       "body": "abstracts",
       "html": "<p>abstracts</p>",
       "label": "abstracts",
+      "relation": true
+    },
+    {
+      "id": "rel:ai-to-ai-protocols--a2ui-agent-to-user-interface:complements",
+      "source": "ai-to-ai-protocols",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "AI-to-AI Protocols complements A2UI",
+      "color": "#5eead4",
+      "body": "complements",
+      "html": "<p>complements</p>",
+      "label": "complements",
       "relation": true
     },
     {
@@ -3137,6 +3952,512 @@
       "body": "exposes",
       "html": "<p>exposes</p>",
       "label": "exposes",
+      "relation": true
+    },
+    {
+      "id": "rel:operating-system--llmos-operating-system:becomes",
+      "source": "operating-system",
+      "target": "llmos-operating-system",
+      "title": "Operating System becomes LLMOS as Operating System",
+      "color": "#5eead4",
+      "body": "becomes",
+      "html": "<p>becomes</p>",
+      "label": "becomes",
+      "relation": true
+    },
+    {
+      "id": "rel:operating-system--interfaces:renders-through",
+      "source": "operating-system",
+      "target": "interfaces",
+      "title": "Operating System renders through Interfaces",
+      "color": "#5eead4",
+      "body": "renders through",
+      "html": "<p>renders through</p>",
+      "label": "renders through",
+      "relation": true
+    },
+    {
+      "id": "rel:data--storage:lives-in",
+      "source": "data",
+      "target": "storage",
+      "title": "Data lives in Storage",
+      "color": "#5eead4",
+      "body": "lives in",
+      "html": "<p>lives in</p>",
+      "label": "lives in",
+      "relation": true
+    },
+    {
+      "id": "rel:data--toon-ui-state:can-become",
+      "source": "data",
+      "target": "toon-ui-state",
+      "title": "Data can become TOON UI State",
+      "color": "#5eead4",
+      "body": "can become",
+      "html": "<p>can become</p>",
+      "label": "can become",
+      "relation": true
+    },
+    {
+      "id": "rel:toon-ui-state--unified-editable-ui:describes",
+      "source": "toon-ui-state",
+      "target": "unified-editable-ui",
+      "title": "TOON UI State describes Unified Editable UI",
+      "color": "#5eead4",
+      "body": "describes",
+      "html": "<p>describes</p>",
+      "label": "describes",
+      "relation": true
+    },
+    {
+      "id": "rel:toon-ui-state--minimal-model-kernel:feeds",
+      "source": "toon-ui-state",
+      "target": "minimal-model-kernel",
+      "title": "TOON UI State feeds Minimal Model Kernel",
+      "color": "#5eead4",
+      "body": "feeds",
+      "html": "<p>feeds</p>",
+      "label": "feeds",
+      "relation": true
+    },
+    {
+      "id": "rel:focused-ui-state--toon-ui-state:compresses-into",
+      "source": "focused-ui-state",
+      "target": "toon-ui-state",
+      "title": "Focused UI State compresses into TOON UI State",
+      "color": "#5eead4",
+      "body": "compresses into",
+      "html": "<p>compresses into</p>",
+      "label": "compresses into",
+      "relation": true
+    },
+    {
+      "id": "rel:focused-ui-state--unified-editable-ui:is-selected-within",
+      "source": "focused-ui-state",
+      "target": "unified-editable-ui",
+      "title": "Focused UI State is selected within Unified Editable UI",
+      "color": "#5eead4",
+      "body": "is selected within",
+      "html": "<p>is selected within</p>",
+      "label": "is selected within",
+      "relation": true
+    },
+    {
+      "id": "rel:chat-as-first-interface--voice-interface:is-joined-by",
+      "source": "chat-as-first-interface",
+      "target": "voice-interface",
+      "title": "Chat as the First Interface is joined by Voice Interface",
+      "color": "#5eead4",
+      "body": "is joined by",
+      "html": "<p>is joined by</p>",
+      "label": "is joined by",
+      "relation": true
+    },
+    {
+      "id": "rel:chat-as-first-interface--agentic-daemons:becomes-operational-through",
+      "source": "chat-as-first-interface",
+      "target": "agentic-daemons",
+      "title": "Chat as the First Interface becomes operational through Agentic Daemons",
+      "color": "#5eead4",
+      "body": "becomes operational through",
+      "html": "<p>becomes operational through</p>",
+      "label": "becomes operational through",
+      "relation": true
+    },
+    {
+      "id": "rel:voice-interface--bci-intent-interface:points-toward",
+      "source": "voice-interface",
+      "target": "bci-intent-interface",
+      "title": "Voice Interface points toward BCI Intent Interface",
+      "color": "#5eead4",
+      "body": "points toward",
+      "html": "<p>points toward</p>",
+      "label": "points toward",
+      "relation": true
+    },
+    {
+      "id": "rel:voice-interface--extended-mind:externalizes",
+      "source": "voice-interface",
+      "target": "extended-mind",
+      "title": "Voice Interface externalizes Extended Mind",
+      "color": "#7dd3fc",
+      "body": "externalizes",
+      "html": "<p>externalizes</p>",
+      "label": "externalizes",
+      "relation": true
+    },
+    {
+      "id": "rel:bci-intent-interface--bci-as-final-interface:refines",
+      "source": "bci-intent-interface",
+      "target": "bci-as-final-interface",
+      "title": "BCI Intent Interface refines BCI as Final Interface",
+      "color": "#5eead4",
+      "body": "refines",
+      "html": "<p>refines</p>",
+      "label": "refines",
+      "relation": true
+    },
+    {
+      "id": "rel:bci-intent-interface--mind:bypasses-language-from",
+      "source": "bci-intent-interface",
+      "target": "mind",
+      "title": "BCI Intent Interface bypasses language from Mind",
+      "color": "#7dd3fc",
+      "body": "bypasses language from",
+      "html": "<p>bypasses language from</p>",
+      "label": "bypasses language from",
+      "relation": true
+    },
+    {
+      "id": "rel:bci-intent-interface--a2ui-agent-to-user-interface:still-needs-output-through",
+      "source": "bci-intent-interface",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "BCI Intent Interface still needs output through A2UI",
+      "color": "#5eead4",
+      "body": "still needs output through",
+      "html": "<p>still needs output through</p>",
+      "label": "still needs output through",
+      "relation": true
+    },
+    {
+      "id": "rel:a2ui-agent-to-user-interface--structured-ui-blueprint:emits",
+      "source": "a2ui-agent-to-user-interface",
+      "target": "structured-ui-blueprint",
+      "title": "A2UI emits Structured UI Blueprint",
+      "color": "#5eead4",
+      "body": "emits",
+      "html": "<p>emits</p>",
+      "label": "emits",
+      "relation": true
+    },
+    {
+      "id": "rel:a2ui-agent-to-user-interface--unified-editable-ui:renders-into",
+      "source": "a2ui-agent-to-user-interface",
+      "target": "unified-editable-ui",
+      "title": "A2UI renders into Unified Editable UI",
+      "color": "#5eead4",
+      "body": "renders into",
+      "html": "<p>renders into</p>",
+      "label": "renders into",
+      "relation": true
+    },
+    {
+      "id": "rel:a2ui-agent-to-user-interface--ai-to-ai-protocols:complements",
+      "source": "a2ui-agent-to-user-interface",
+      "target": "ai-to-ai-protocols",
+      "title": "A2UI complements AI-to-AI Protocols",
+      "color": "#5eead4",
+      "body": "complements",
+      "html": "<p>complements</p>",
+      "label": "complements",
+      "relation": true
+    },
+    {
+      "id": "rel:a2ui-agent-to-user-interface--post-saas-economy:accelerates",
+      "source": "a2ui-agent-to-user-interface",
+      "target": "post-saas-economy",
+      "title": "A2UI accelerates Post-SaaS Economy",
+      "color": "#facc15",
+      "body": "accelerates",
+      "html": "<p>accelerates</p>",
+      "label": "accelerates",
+      "relation": true
+    },
+    {
+      "id": "rel:unified-editable-ui--focused-ui-state:exposes",
+      "source": "unified-editable-ui",
+      "target": "focused-ui-state",
+      "title": "Unified Editable UI exposes Focused UI State",
+      "color": "#5eead4",
+      "body": "exposes",
+      "html": "<p>exposes</p>",
+      "label": "exposes",
+      "relation": true
+    },
+    {
+      "id": "rel:unified-editable-ui--toon-ui-state:is-serialized-as",
+      "source": "unified-editable-ui",
+      "target": "toon-ui-state",
+      "title": "Unified Editable UI is serialized as TOON UI State",
+      "color": "#5eead4",
+      "body": "is serialized as",
+      "html": "<p>is serialized as</p>",
+      "label": "is serialized as",
+      "relation": true
+    },
+    {
+      "id": "rel:unified-editable-ui--operating-system:overlays",
+      "source": "unified-editable-ui",
+      "target": "operating-system",
+      "title": "Unified Editable UI overlays Operating System",
+      "color": "#5eead4",
+      "body": "overlays",
+      "html": "<p>overlays</p>",
+      "label": "overlays",
+      "relation": true
+    },
+    {
+      "id": "rel:unified-editable-ui--post-os-agent-computer:becomes-native-in",
+      "source": "unified-editable-ui",
+      "target": "post-os-agent-computer",
+      "title": "Unified Editable UI becomes native in Post-OS Agent Computer",
+      "color": "#5eead4",
+      "body": "becomes native in",
+      "html": "<p>becomes native in</p>",
+      "label": "becomes native in",
+      "relation": true
+    },
+    {
+      "id": "rel:structured-ui-blueprint--a2ui-agent-to-user-interface:is-emitted-by",
+      "source": "structured-ui-blueprint",
+      "target": "a2ui-agent-to-user-interface",
+      "title": "Structured UI Blueprint is emitted by A2UI",
+      "color": "#5eead4",
+      "body": "is emitted by",
+      "html": "<p>is emitted by</p>",
+      "label": "is emitted by",
+      "relation": true
+    },
+    {
+      "id": "rel:structured-ui-blueprint--unified-editable-ui:renders-as",
+      "source": "structured-ui-blueprint",
+      "target": "unified-editable-ui",
+      "title": "Structured UI Blueprint renders as Unified Editable UI",
+      "color": "#5eead4",
+      "body": "renders as",
+      "html": "<p>renders as</p>",
+      "label": "renders as",
+      "relation": true
+    },
+    {
+      "id": "rel:generated-ui--post-os-agent-computer:is-output-of",
+      "source": "generated-ui",
+      "target": "post-os-agent-computer",
+      "title": "Generated UI is output of Post-OS Agent Computer",
+      "color": "#5eead4",
+      "body": "is output of",
+      "html": "<p>is output of</p>",
+      "label": "is output of",
+      "relation": true
+    },
+    {
+      "id": "rel:generated-ui--unified-editable-ui:appears-within",
+      "source": "generated-ui",
+      "target": "unified-editable-ui",
+      "title": "Generated UI appears within Unified Editable UI",
+      "color": "#5eead4",
+      "body": "appears within",
+      "html": "<p>appears within</p>",
+      "label": "appears within",
+      "relation": true
+    },
+    {
+      "id": "rel:llmos-operating-system--llmos:extends",
+      "source": "llmos-operating-system",
+      "target": "llmos",
+      "title": "LLMOS as Operating System extends LLMOS",
+      "color": "#f0abfc",
+      "body": "extends",
+      "html": "<p>extends</p>",
+      "label": "extends",
+      "relation": true
+    },
+    {
+      "id": "rel:llmos-operating-system--os-overlay:begins-as",
+      "source": "llmos-operating-system",
+      "target": "os-overlay",
+      "title": "LLMOS as Operating System begins as OS Overlay",
+      "color": "#5eead4",
+      "body": "begins as",
+      "html": "<p>begins as</p>",
+      "label": "begins as",
+      "relation": true
+    },
+    {
+      "id": "rel:llmos-operating-system--minimal-model-kernel:compresses-into",
+      "source": "llmos-operating-system",
+      "target": "minimal-model-kernel",
+      "title": "LLMOS as Operating System compresses into Minimal Model Kernel",
+      "color": "#5eead4",
+      "body": "compresses into",
+      "html": "<p>compresses into</p>",
+      "label": "compresses into",
+      "relation": true
+    },
+    {
+      "id": "rel:llmos-operating-system--unified-editable-ui:renders-through",
+      "source": "llmos-operating-system",
+      "target": "unified-editable-ui",
+      "title": "LLMOS as Operating System renders through Unified Editable UI",
+      "color": "#5eead4",
+      "body": "renders through",
+      "html": "<p>renders through</p>",
+      "label": "renders through",
+      "relation": true
+    },
+    {
+      "id": "rel:minimal-model-kernel--tool-contracts:learns",
+      "source": "minimal-model-kernel",
+      "target": "tool-contracts",
+      "title": "Minimal Model Kernel learns Tool Contracts",
+      "color": "#5eead4",
+      "body": "learns",
+      "html": "<p>learns</p>",
+      "label": "learns",
+      "relation": true
+    },
+    {
+      "id": "rel:minimal-model-kernel--context-kernel:depends-on",
+      "source": "minimal-model-kernel",
+      "target": "context-kernel",
+      "title": "Minimal Model Kernel depends on Context Kernel",
+      "color": "#f0abfc",
+      "body": "depends on",
+      "html": "<p>depends on</p>",
+      "label": "depends on",
+      "relation": true
+    },
+    {
+      "id": "rel:minimal-model-kernel--post-os-agent-computer:powers",
+      "source": "minimal-model-kernel",
+      "target": "post-os-agent-computer",
+      "title": "Minimal Model Kernel powers Post-OS Agent Computer",
+      "color": "#5eead4",
+      "body": "powers",
+      "html": "<p>powers</p>",
+      "label": "powers",
+      "relation": true
+    },
+    {
+      "id": "rel:post-os-agent-computer--operating-system:succeeds",
+      "source": "post-os-agent-computer",
+      "target": "operating-system",
+      "title": "Post-OS Agent Computer succeeds Operating System",
+      "color": "#5eead4",
+      "body": "succeeds",
+      "html": "<p>succeeds</p>",
+      "label": "succeeds",
+      "relation": true
+    },
+    {
+      "id": "rel:post-os-agent-computer--generated-ui:outputs",
+      "source": "post-os-agent-computer",
+      "target": "generated-ui",
+      "title": "Post-OS Agent Computer outputs Generated UI",
+      "color": "#5eead4",
+      "body": "outputs",
+      "html": "<p>outputs</p>",
+      "label": "outputs",
+      "relation": true
+    },
+    {
+      "id": "rel:post-os-agent-computer--storage:keeps",
+      "source": "post-os-agent-computer",
+      "target": "storage",
+      "title": "Post-OS Agent Computer keeps Storage",
+      "color": "#5eead4",
+      "body": "keeps",
+      "html": "<p>keeps</p>",
+      "label": "keeps",
+      "relation": true
+    },
+    {
+      "id": "rel:post-os-agent-computer--model-inference:runs-as",
+      "source": "post-os-agent-computer",
+      "target": "model-inference",
+      "title": "Post-OS Agent Computer runs as Model Inference",
+      "color": "#5eead4",
+      "body": "runs as",
+      "html": "<p>runs as</p>",
+      "label": "runs as",
+      "relation": true
+    },
+    {
+      "id": "rel:model-inference--compute:consumes",
+      "source": "model-inference",
+      "target": "compute",
+      "title": "Model Inference consumes Compute",
+      "color": "#5eead4",
+      "body": "consumes",
+      "html": "<p>consumes</p>",
+      "label": "consumes",
+      "relation": true
+    },
+    {
+      "id": "rel:model-inference--data:transforms",
+      "source": "model-inference",
+      "target": "data",
+      "title": "Model Inference transforms Data",
+      "color": "#5eead4",
+      "body": "transforms",
+      "html": "<p>transforms</p>",
+      "label": "transforms",
+      "relation": true
+    },
+    {
+      "id": "rel:os-overlay--llmos-operating-system:is-early-form-of",
+      "source": "os-overlay",
+      "target": "llmos-operating-system",
+      "title": "OS Overlay is early form of LLMOS as Operating System",
+      "color": "#5eead4",
+      "body": "is early form of",
+      "html": "<p>is early form of</p>",
+      "label": "is early form of",
+      "relation": true
+    },
+    {
+      "id": "rel:os-overlay--system-calls:gives-way-to",
+      "source": "os-overlay",
+      "target": "system-calls",
+      "title": "OS Overlay gives way to System Calls",
+      "color": "#5eead4",
+      "body": "gives way to",
+      "html": "<p>gives way to</p>",
+      "label": "gives way to",
+      "relation": true
+    },
+    {
+      "id": "rel:system-calls--kernel-level-agent-substrate:descend-into",
+      "source": "system-calls",
+      "target": "kernel-level-agent-substrate",
+      "title": "System Calls descend into Kernel-Level Agent Substrate",
+      "color": "#5eead4",
+      "body": "descend into",
+      "html": "<p>descend into</p>",
+      "label": "descend into",
+      "relation": true
+    },
+    {
+      "id": "rel:system-calls--tool-contracts:formalize",
+      "source": "system-calls",
+      "target": "tool-contracts",
+      "title": "System Calls formalize Tool Contracts",
+      "color": "#5eead4",
+      "body": "formalize",
+      "html": "<p>formalize</p>",
+      "label": "formalize",
+      "relation": true
+    },
+    {
+      "id": "rel:kernel-level-agent-substrate--post-os-agent-computer:matures-into",
+      "source": "kernel-level-agent-substrate",
+      "target": "post-os-agent-computer",
+      "title": "Kernel-Level Agent Substrate matures into Post-OS Agent Computer",
+      "color": "#5eead4",
+      "body": "matures into",
+      "html": "<p>matures into</p>",
+      "label": "matures into",
+      "relation": true
+    },
+    {
+      "id": "rel:kernel-level-agent-substrate--minimal-model-kernel:hosts",
+      "source": "kernel-level-agent-substrate",
+      "target": "minimal-model-kernel",
+      "title": "Kernel-Level Agent Substrate hosts Minimal Model Kernel",
+      "color": "#5eead4",
+      "body": "hosts",
+      "html": "<p>hosts</p>",
+      "label": "hosts",
       "relation": true
     }
   ]

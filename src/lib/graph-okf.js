@@ -33,7 +33,17 @@ export function markdownToHtml(markdown = '') {
 		.trim()
 		.split(/\n{2,}/)
 		.filter(Boolean)
-		.map((block) => `<p>${escapeHtml(block).replace(/\n/g, ' ').trim()}</p>`)
+		.map((block) => {
+			const trimmed = block.trim();
+			const image = trimmed.match(/^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)$/);
+			if (image) return `<figure><img src="${escapeHtml(image[2])}" alt="${escapeHtml(image[1])}" loading="lazy" /></figure>`;
+			const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+			if (heading) {
+				const level = heading[1].length + 1;
+				return `<h${level}>${escapeHtml(heading[2]).trim()}</h${level}>`;
+			}
+			return `<p>${escapeHtml(trimmed).replace(/\n/g, ' ').trim()}</p>`;
+		})
 		.join('\n');
 }
 
