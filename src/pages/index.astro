@@ -751,9 +751,9 @@ import graph from '../data/graph.json';
 		function dimForDistance(focus, id) {
 			const distance = focus.distances.get(id);
 			if (distance === 0) return 1;
-			if (distance === 1) return 0.24;
-			if (focus.orbitNodeIds?.has(id)) return 0.12;
-			return 0.025;
+			if (distance === 1) return 0.48;
+			if (focus.orbitNodeIds?.has(id)) return 0.34;
+			return 0.1;
 		}
 
 		function nodeFocusTarget(focus, node) {
@@ -767,9 +767,9 @@ import graph from '../data/graph.json';
 
 		function nodeSizeForFocus(dim) {
 			if (dim >= 0.58) return THREE.MathUtils.lerp(1.12, 1.82, (dim - 0.58) / 0.42);
-			if (dim >= 0.18) return THREE.MathUtils.lerp(0.46, 0.82, (dim - 0.18) / 0.4);
-			if (dim >= 0.08) return THREE.MathUtils.lerp(0.28, 0.46, (dim - 0.08) / 0.1);
-			return THREE.MathUtils.lerp(0.16, 0.28, dim / 0.08);
+			if (dim >= 0.18) return THREE.MathUtils.lerp(0.58, 1.02, (dim - 0.18) / 0.4);
+			if (dim >= 0.08) return THREE.MathUtils.lerp(0.38, 0.58, (dim - 0.08) / 0.1);
+			return THREE.MathUtils.lerp(0.24, 0.38, dim / 0.08);
 		}
 
 		function nodeCoreScaleForFocus(dim) {
@@ -779,9 +779,9 @@ import graph from '../data/graph.json';
 
 		function nodeOpacityForFocus(dim, isRoot = false) {
 			if (dim >= 0.58) return THREE.MathUtils.lerp(0.62, 0.98, (dim - 0.58) / 0.42);
-			if (dim >= 0.18) return THREE.MathUtils.lerp(0.2, 0.58, (dim - 0.18) / 0.4);
-			if (dim >= 0.08) return THREE.MathUtils.lerp(0.08, 0.2, (dim - 0.08) / 0.1);
-			return Math.max(isRoot ? 0.1 : 0.035, 0.035 + dim * 0.45);
+			if (dim >= 0.18) return THREE.MathUtils.lerp(0.28, 0.58, (dim - 0.18) / 0.4);
+			if (dim >= 0.08) return THREE.MathUtils.lerp(0.15, 0.28, (dim - 0.08) / 0.1);
+			return Math.max(isRoot ? 0.16 : 0.08, 0.08 + dim * 0.7);
 		}
 
 		function nodeColorForFocus(node, dim) {
@@ -792,27 +792,27 @@ import graph from '../data/graph.json';
 
 		function glowOpacityForFocus(dim) {
 			if (dim >= 0.58) return THREE.MathUtils.lerp(0.26, 0.82, (dim - 0.58) / 0.42);
-			if (dim >= 0.18) return THREE.MathUtils.lerp(0.055, 0.22, (dim - 0.18) / 0.4);
-			if (dim >= 0.08) return THREE.MathUtils.lerp(0.018, 0.055, (dim - 0.08) / 0.1);
-			return 0.004 + dim * 0.08;
+			if (dim >= 0.18) return THREE.MathUtils.lerp(0.09, 0.24, (dim - 0.18) / 0.4);
+			if (dim >= 0.08) return THREE.MathUtils.lerp(0.035, 0.09, (dim - 0.08) / 0.1);
+			return 0.018 + dim * 0.16;
 		}
 
 		function glowScaleForFocus(dim) {
 			if (dim >= 0.58) return THREE.MathUtils.lerp(5.8, 12.6, (dim - 0.58) / 0.42);
-			if (dim >= 0.18) return THREE.MathUtils.lerp(1.6, 3.6, (dim - 0.18) / 0.4);
-			return 1.05 + dim * 3.2;
+			if (dim >= 0.18) return THREE.MathUtils.lerp(2.2, 4.4, (dim - 0.18) / 0.4);
+			return 1.45 + dim * 4;
 		}
 
 		function edgeOpacityForFocus(dim) {
-			return dim >= 0.58 ? THREE.MathUtils.lerp(0.18, 0.36, (dim - 0.58) / 0.42) : dim * 0.07;
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.18, 0.36, (dim - 0.58) / 0.42) : dim * 0.16;
 		}
 
 		function edgeHaloOpacityForFocus(dim) {
-			return dim >= 0.58 ? THREE.MathUtils.lerp(0.04, 0.16, (dim - 0.58) / 0.42) : dim * 0.008;
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.04, 0.16, (dim - 0.58) / 0.42) : dim * 0.035;
 		}
 
 		function edgeTubeOpacityForFocus(dim) {
-			return dim >= 0.58 ? THREE.MathUtils.lerp(0.025, 0.09, (dim - 0.58) / 0.42) : 0;
+			return dim >= 0.58 ? THREE.MathUtils.lerp(0.025, 0.09, (dim - 0.58) / 0.42) : Math.max(0, (dim - 0.32) * 0.08);
 		}
 
 		function edgeShipOpacityForFocus(dim) {
@@ -826,9 +826,9 @@ import graph from '../data/graph.json';
 		function orbitFocusTargetForLevel(level, focusLevels) {
 			if (!focusLevels.size) return 0.24;
 			if (focusLevels.has(0)) return level === 1 ? 0.64 : 0.2;
-			if (focusLevels.has(level)) return selectedOrbitLevel === level ? 0.86 : 0.38;
+			if (focusLevels.has(level)) return selectedOrbitLevel === level ? 0.86 : 0.62;
 			const nearFocusedLevel = [...focusLevels].some((focusLevel) => Math.abs(focusLevel - level) === 1);
-			return nearFocusedLevel ? 0.18 : 0.04;
+			return nearFocusedLevel ? 0.26 : 0.14;
 		}
 
 		function orbitOpacityForFocus(baseOpacity, dim) {
@@ -1037,7 +1037,7 @@ import graph from '../data/graph.json';
 					const targetDim = dimForDistance(focus, edge.target);
 					const isSelectedRelation = selectedEdgeId === edge.id;
 					const isContextEdge = focus.edgeIds.has(edge.id);
-					const targetFocusDim = isSelectedRelation ? 1 : isContextEdge ? 0.42 : Math.min(sourceDim, targetDim);
+					const targetFocusDim = isSelectedRelation ? 1 : isContextEdge ? 0.56 : Math.min(sourceDim, targetDim);
 					const currentFocusDim = edgeFocusVisuals.get(edge.id) ?? targetFocusDim;
 					const source = orbitPosition(nodesById.get(edge.source)).position;
 					const target = orbitPosition(nodesById.get(edge.target)).position;
